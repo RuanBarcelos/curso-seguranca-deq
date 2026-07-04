@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Integração Laboratorial — DEQ/UFSCar</title>
+  <style>
+    :root {
+      --navy:   #1A3A5C;
+      --navy-light: #254d7a;
+      --amber:  #E8960C;
+      --amber-light: #FDF3DC;
+      --green:  #1E6B3C;
+      --green-light: #D4EDDA;
+      --red:    #B91C1C;
+      --red-light: #FEE2E2;
+      --bg:     #F4F7FB;
+      --surface:#FFFFFF;
+      --border: #D1DCEA;
+      --text:   #111827;
+      --muted:  #6B7280;
+      --radius: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      color: #fff;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      gap: 24px;
+    }
+    .header-brand { display: flex; align-items: center; gap: 12px; }
+    .header-brand .badge {
+      background: var(--amber);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: .08em;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .header-brand h1 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+    .header-brand small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      opacity: .65;
+      margin-top: 1px;
+    }
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+    .progress-bar-bg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,.2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--amber);
+      border-radius: 99px;
+      width: 0%;
+      transition: width .5s ease;
+    }
+    .progress-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--amber);
+      white-space: nowrap;
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: calc(100vh - 58px);
+    }
+
+    /* ── SIDEBAR ── */
+    aside {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+      position: sticky;
+      top: 58px;
+      height: calc(100vh - 58px);
+      overflow-y: auto;
+    }
+    .aside-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 20px 10px;
+    }
+    .module-nav-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all .2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .module-nav-item:hover { background: var(--bg); }
+    .module-nav-item.active {
+      border-left-color: var(--amber);
+      background: var(--amber-light);
+    }
+    .module-nav-item.completed .nav-icon { background: var(--green); color: #fff; }
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      transition: all .3s;
+    }
+    .module-nav-item.active .nav-icon {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: var(--navy);
+      font-weight: 800;
+    }
+    .nav-text { flex: 1; }
+    .nav-text strong { display: block; font-size: 13px; font-weight: 600; line-height: 1.3; }
+    .nav-text span { font-size: 11px; color: var(--muted); }
+
+    .nav-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 20px;
+    }
+    .quiz-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all .2s;
+      color: inherit;
+    }
+    .quiz-nav-item:hover { background: var(--bg); }
+    .quiz-nav-item.active { border-left-color: var(--navy); background: #EBF0F8; }
+    .quiz-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .quiz-nav-text strong { font-size: 13px; font-weight: 700; }
+    .quiz-nav-text span { font-size: 11px; color: var(--muted); }
+
+    /* ── MAIN ── */
+    main {
+      padding: 36px 40px;
+      max-width: 820px;
+    }
+
+    /* MODULE SCREEN */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    .module-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .module-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    /* VIDEO PLACEHOLDER */
+    .video-placeholder {
+      background: #0F2035;
+      border-radius: var(--radius);
+      padding: 0;
+      margin-bottom: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+    .video-inner {
+      aspect-ratio: 16/7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(255,255,255,.8);
+    }
+    .video-play-btn {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(232,150,12,.15);
+      border: 2px solid var(--amber);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      color: var(--amber);
+    }
+    .video-label {
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      max-width: 400px;
+      line-height: 1.4;
+    }
+    .video-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: rgba(232,150,12,.9);
+      color: #0F2035;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* CONTENT BLOCKS */
+    .content-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .content-block h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .content-block h3 .icon { font-size: 20px; }
+    .content-block p {
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .content-block p:last-child { margin-bottom: 0; }
+
+    /* ALERT BOXES */
+    .alert {
+      display: flex;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert.warning { background: var(--amber-light); border-left: 4px solid var(--amber); }
+    .alert.danger  { background: var(--red-light);   border-left: 4px solid var(--red);   }
+    .alert.info    { background: #EBF5FF;             border-left: 4px solid #3B82F6;      }
+    .alert.success { background: var(--green-light);  border-left: 4px solid var(--green); }
+
+    /* HIERARCHY TABLE */
+    .hierarchy {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 16px 0;
+    }
+    .hierarchy-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 7px;
+      font-size: 13.5px;
+    }
+    .hr1 { background: #1E6B3C; color: #fff; }
+    .hr2 { background: #2E7D32; color: #fff; }
+    .hr3 { background: #F59E0B; color: #1a1a1a; }
+    .hr4 { background: #EF6C00; color: #fff; }
+    .hr5 { background: #B91C1C; color: #fff; }
+    .hierarchy-row .hr-num { font-weight: 800; font-size: 16px; min-width: 28px; }
+    .hierarchy-row .hr-label { font-weight: 700; flex: 1; }
+    .hierarchy-row .hr-rel { font-size: 12px; opacity: .85; }
+
+    /* RISK TAGS */
+    .risk-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .risk-tag {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag-fisico   { background: #DBEAFE; color: #1E3A8A; }
+    .tag-quimico  { background: #FEE2E2; color: #7F1D1D; }
+    .tag-mecanico { background: #FEF3C7; color: #78350F; }
+    .tag-biologico{ background: #D1FAE5; color: #064E3B; }
+    .tag-ergonomico{ background: #EDE9FE; color: #4C1D95; }
+
+    /* EPI GRID */
+    .epi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .epi-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .epi-card .epi-icon { font-size: 26px; display: block; margin-bottom: 6px; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 13.5px;
+    }
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* CHECKPOINT */
+    .checkpoint {
+      background: var(--navy);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 28px;
+    }
+    .checkpoint h4 { font-size: 13px; letter-spacing: .07em; text-transform: uppercase; opacity: .65; margin-bottom: 8px; }
+    .checkpoint .q-text { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .cp-options { display: flex; flex-direction: column; gap: 8px; }
+    .cp-option {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 7px;
+      padding: 11px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all .2s;
+      text-align: left;
+      color: #fff;
+    }
+    .cp-option:hover { background: rgba(255,255,255,.15); }
+    .cp-option.correct { background: rgba(30,107,60,.8); border-color: #4ADE80; }
+    .cp-option.wrong   { background: rgba(185,28,28,.6); border-color: #F87171; }
+    .cp-feedback {
+      margin-top: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: .85;
+      display: none;
+    }
+
+    /* NEXT BUTTON */
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: all .2s;
+    }
+    .btn-next:hover { background: #D4890B; transform: translateY(-1px); }
+    .btn-next:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    /* ── QUIZ ── */
+    .quiz-header {
+      background: var(--navy);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    .quiz-header h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .quiz-header p { font-size: 14px; opacity: .75; }
+    .quiz-progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+    }
+    .quiz-counter { font-size: 13px; font-weight: 700; color: var(--amber); }
+    .quiz-bar-bg {
+      flex: 1;
+      height: 5px;
+      background: rgba(255,255,255,.2);
+      border-radius: 99px;
+      margin: 0 16px;
+      overflow: hidden;
+    }
+    .quiz-bar-fill {
+      height: 100%;
+      background: var(--amber);
+      border-radius: 99px;
+      width: 0%;
+      transition: width .4s ease;
+    }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+    .q-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .q-question {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+    .q-options { display: flex; flex-direction: column; gap: 10px; }
+    .q-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1.5;
+      transition: all .2s;
+      background: var(--bg);
+      text-align: left;
+      color: var(--text);
+      width: 100%;
+    }
+    .q-option:hover:not(:disabled) { border-color: var(--navy); background: #EBF0F8; }
+    .q-option.selected   { border-color: var(--navy);  background: #EBF0F8; }
+    .q-option.correct    { border-color: var(--green); background: var(--green-light); color: var(--green); font-weight: 600; }
+    .q-option.wrong      { border-color: var(--red);   background: var(--red-light);   color: var(--red);   font-weight: 600; }
+    .q-option:disabled   { cursor: not-allowed; }
+    .opt-letter {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .q-feedback {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 7px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      display: none;
+    }
+    .q-feedback.show { display: block; }
+    .q-feedback.ok  { background: var(--green-light); color: var(--green); border-left: 4px solid var(--green); }
+    .q-feedback.err { background: var(--red-light);   color: var(--red);   border-left: 4px solid var(--red);   }
+
+    .btn-quiz-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all .2s;
+    }
+    .btn-quiz-next:hover { background: var(--navy-light); }
+    .btn-quiz-next:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* RESULT */
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+    }
+    .result-score-ring {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 6px solid var(--amber);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      margin: 0 auto 24px;
+    }
+    .result-score-ring .score-num { font-size: 36px; font-weight: 900; color: var(--navy); line-height: 1; }
+    .result-score-ring .score-tot { font-size: 13px; color: var(--muted); }
+    .result-title { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .result-msg   { font-size: 14px; color: var(--muted); max-width: 420px; margin: 0 auto 24px; line-height: 1.7; }
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+    .badge-pass { background: var(--green-light); color: var(--green); }
+    .badge-fail { background: var(--red-light);   color: var(--red);   }
+    .btn-restart {
+      background: var(--bg);
+      color: var(--navy);
+      border: 2px solid var(--border);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-restart:hover { background: var(--border); }
+
+    /* WELCOME */
+    .welcome-hero {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 36px;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .welcome-hero .wh-label {
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); font-weight: 700; margin-bottom: 10px;
+    }
+    .welcome-hero h2 { font-size: 26px; font-weight: 800; line-height: 1.25; margin-bottom: 14px; }
+    .welcome-hero p  { font-size: 14px; opacity: .8; line-height: 1.7; }
+    .welcome-meta {
+      display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap;
+    }
+    .meta-item { display: flex; gap: 8px; align-items: center; font-size: 13px; opacity: .75; }
+
+    .module-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .module-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .module-card:hover { border-color: var(--amber); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .mc-icon { font-size: 24px; margin-bottom: 8px; }
+    .mc-title { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.35; }
+    .mc-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+    @media (max-width: 720px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { display: none; }
+      main  { padding: 20px 16px; }
+      .module-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="badge">DEQ · UFSCar</div>
+      <div>
+        <h1>Curso de Integração Laboratorial</h1>
+        <small>Comissão de Segurança — Departamento de Engenharia Química</small>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="mainProgress"></div></div>
+      <span class="progress-label" id="mainProgressLabel">0%</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="aside-title">Módulos</div>
+
+    <div class="module-nav-item active" onclick="goTo('welcome')" id="nav-welcome">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-text">
+        <strong>Início</strong>
+        <span>Apresentação do curso</span>
+      </div>
+    </div>
+
+    <div class="module-nav-item" onclick="goTo('m1')" id="nav-m1">
+      <div class="nav-icon">1</div>
+      <div class="nav-text">
+        <strong>Fundamentos de Segurança</strong>
+        <span>Hierarquia · Queijo Suíço</span>
+      </div>
+    </div>
+
+    <div class="module-nav-item" onclick="goTo('m2')" id="nav-m2">
+      <div class="nav-icon">2</div>
+      <div class="nav-text">
+        <strong>O Espaço Laboratorial</strong>
+        <span>Laboratório Didático e DPQ</span>
+      </div>
+    </div>
+
+    <div class="module-nav-item" onclick="goTo('m3')" id="nav-m3">
+      <div class="nav-icon">3</div>
+      <div class="nav-text">
+        <strong>Riscos Identificados</strong>
+        <span>Físicos · Químicos · Mecânicos</span>
+      </div>
+    </div>
+
+    <div class="module-nav-item" onclick="goTo('m4')" id="nav-m4">
+      <div class="nav-icon">4</div>
+      <div class="nav-text">
+        <strong>EPIs e Sinalização</strong>
+        <span>Proteção individual e coletiva</span>
+      </div>
+    </div>
+
+    <div class="module-nav-item" onclick="goTo('m5')" id="nav-m5">
+      <div class="nav-icon">5</div>
+      <div class="nav-text">
+        <strong>Emergências e Reporte</strong>
+        <span>Protocolos e canal de incidentes</span>
+      </div>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <div class="quiz-nav-item" onclick="goTo('quiz')" id="nav-quiz">
+      <div class="quiz-icon">📝</div>
+      <div class="quiz-nav-text">
+        <strong>Avaliação Final</strong>
+        <span>10 questões · obrigatório</span>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ══ WELCOME ══ -->
+    <div class="screen active" id="screen-welcome">
+      <div class="welcome-hero">
+        <div class="wh-label">Bem-vindo(a) ao curso</div>
+        <h2>Segurança Laboratorial para Estudantes Ingressantes</h2>
+        <p>Antes de acessar o Laboratório Didático e o DPQ, todos os estudantes devem concluir este curso e obter aprovação na avaliação final. Ele foi desenvolvido com base no diagnóstico de segurança realizado neste departamento.</p>
+        <div class="welcome-meta">
+          <div class="meta-item">📚 5 módulos</div>
+          <div class="meta-item">⏱ ~40 minutos</div>
+          <div class="meta-item">✅ Avaliação obrigatória</div>
+          <div class="meta-item">🎯 Nota mínima: 70%</div>
+        </div>
+      </div>
+
+      <div class="module-cards">
+        <div class="module-card" onclick="goTo('m1')">
+          <div class="mc-icon">⚙️</div>
+          <div class="mc-title">Fundamentos de Segurança</div>
+          <div class="mc-label">Módulo 1</div>
+        </div>
+        <div class="module-card" onclick="goTo('m2')">
+          <div class="mc-icon">🏛️</div>
+          <div class="mc-title">O Espaço Laboratorial</div>
+          <div class="mc-label">Módulo 2</div>
+        </div>
+        <div class="module-card" onclick="goTo('m3')">
+          <div class="mc-icon">⚠️</div>
+          <div class="mc-title">Riscos Identificados</div>
+          <div class="mc-label">Módulo 3</div>
+        </div>
+        <div class="module-card" onclick="goTo('m4')">
+          <div class="mc-icon">🦺</div>
+          <div class="mc-title">EPIs e Sinalização</div>
+          <div class="mc-label">Módulo 4</div>
+        </div>
+        <div class="module-card" onclick="goTo('m5')">
+          <div class="mc-icon">🚨</div>
+          <div class="mc-title">Emergências e Reporte</div>
+          <div class="mc-label">Módulo 5</div>
+        </div>
+      </div>
+
+      <div class="alert info">
+        <div class="alert-icon">ℹ️</div>
+        <div>Este curso foi elaborado pela Comissão de Segurança do DEQ/UFSCar com base no diagnóstico técnico conduzido no Laboratório Didático e no Laboratório de Desenvolvimento de Processos Químicos (DPQ). Dúvidas? Acesse o canal de reporte no site da Comissão.</div>
+      </div>
+
+      <button class="btn-next" onclick="goTo('m1')">Começar o curso →</button>
+    </div>
+
+    <!-- ══ MÓDULO 1 ══ -->
+    <div class="screen" id="screen-m1">
+      <div class="module-eyebrow">Módulo 1 de 5</div>
+      <h2 class="module-title">Fundamentos de Segurança de Processos</h2>
+
+      <div class="video-placeholder">
+        <div class="video-badge">📹 Vídeo</div>
+        <div class="video-inner">
+          <div class="video-play-btn">▶</div>
+          <div class="video-label">Introdução à Segurança de Processos em Laboratórios Acadêmicos<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🔄</span>Segurança Ocupacional vs. Segurança de Processos</h3>
+        <p>A segurança no laboratório pode ser dividida em duas vertentes complementares. A <strong>segurança ocupacional</strong> foca na proteção imediata do indivíduo contra riscos cotidianos — regula o uso de EPIs e a disponibilidade de equipamentos de proteção coletiva. Já a <strong>segurança de processos</strong> tem caráter mais sistêmico, visando prevenir eventos raros porém catastróficos, como reações descontroladas, explosões e incêndios.</p>
+        <p>Em ambientes acadêmicos, as duas esferas são indissociáveis: você lidará simultaneamente com riscos de manipulação individual e com a operação de instalações em escala piloto.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🛡️</span>Hierarquia de Controles</h3>
+        <p>A engenharia de segurança organiza as medidas de proteção em cinco níveis, do mais ao menos eficaz:</p>
+        <div class="hierarchy">
+          <div class="hierarchy-row hr1"><span class="hr-num">1</span><span class="hr-label">Eliminação</span><span class="hr-rel">Mais eficaz — remove o perigo na fonte</span></div>
+          <div class="hierarchy-row hr2"><span class="hr-num">2</span><span class="hr-label">Substituição</span><span class="hr-rel">Troca por agente ou processo menos perigoso</span></div>
+          <div class="hierarchy-row hr3"><span class="hr-num">3</span><span class="hr-label">Controles de Engenharia</span><span class="hr-rel">Capelas, sistemas automatizados, blindagens</span></div>
+          <div class="hierarchy-row hr4"><span class="hr-num">4</span><span class="hr-label">Controles Administrativos</span><span class="hr-rel">POPs, treinamentos, este curso</span></div>
+          <div class="hierarchy-row hr5"><span class="hr-num">5</span><span class="hr-label">EPI</span><span class="hr-rel">Menos confiável — depende do comportamento individual</span></div>
+        </div>
+        <div class="alert warning" style="margin-top:14px">
+          <div class="alert-icon">⚠️</div>
+          <div>Em laboratórios didáticos, a eliminação e a substituição frequentemente não são opções — o objetivo pedagógico é trabalhar com os próprios equipamentos e substâncias. Por isso, os Controles Administrativos (como os POPs e este curso) e o uso de EPIs ganham importância central.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🧀</span>Modelo do Queijo Suíço</h3>
+        <p>Desenvolvido por James Reason, esse modelo representa as defesas de um sistema como fatias de queijo empilhadas em série. Os buracos em cada fatia simbolizam <strong>falhas latentes</strong> — vulnerabilidades inerentes ao sistema que, isoladamente, não causam acidentes.</p>
+        <p>O acidente ocorre quando os buracos de todas as fatias se alinham, permitindo que uma <em>trajetória de risco</em> atravesse todas as defesas sem ser interrompida. Cada barreira que você fortalece — usar o EPI correto, seguir o POP, reportar uma anomalia — reduz a probabilidade desse alinhamento fatal.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🧠</span>Percepção de Risco e Normalização do Desvio</h3>
+        <p>A percepção de risco tem duas dimensões: a <strong>cognitiva</strong> (conhecimento técnico sobre o perigo) e a <strong>afetiva</strong> (senso de alerta e preocupação). A execução repetida de atividades perigosas sem consequências negativas pode reduzir a resposta afetiva — um processo chamado <strong>habituação ao risco</strong>.</p>
+        <p>Quando pequenos desvios passam a ser aceitos sem reação institucional, instala-se a <strong>normalização do desvio</strong>: práticas inseguras se tornam progressivamente a norma informal do grupo. É por isso que reportar anomalias — mesmo pequenas — é fundamental para a segurança coletiva.</p>
+      </div>
+
+      <!-- CHECKPOINT -->
+      <div class="checkpoint">
+        <h4>✔ Verificação de aprendizado</h4>
+        <div class="q-text">Na Hierarquia de Controles, qual nível é considerado o <em>menos confiável</em>?</div>
+        <div class="cp-options">
+          <button class="cp-option" onclick="checkCp(this, false)">Controles de Engenharia</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Controles Administrativos</button>
+          <button class="cp-option" onclick="checkCp(this, true)">Equipamento de Proteção Individual (EPI)</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Eliminação</button>
+        </div>
+        <div class="cp-feedback" id="cp-m1-feedback">✅ Correto! O EPI depende inteiramente da adesão individual do operador em cada momento, sendo a barreira mais frágil do sistema.</div>
+      </div>
+
+      <button class="btn-next" onclick="completeModule('m1','m2')">Próximo módulo →</button>
+    </div>
+
+    <!-- ══ MÓDULO 2 ══ -->
+    <div class="screen" id="screen-m2">
+      <div class="module-eyebrow">Módulo 2 de 5</div>
+      <h2 class="module-title">O Espaço Laboratorial: Didático e DPQ</h2>
+
+      <div class="video-placeholder">
+        <div class="video-badge">📹 Vídeo</div>
+        <div class="video-inner">
+          <div class="video-play-btn">▶</div>
+          <div class="video-label">Tour Virtual pelo Laboratório Didático e DPQ<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🏛️</span>O complexo integrado</h3>
+        <p>O Laboratório Didático e o Laboratório de Desenvolvimento de Processos Químicos (DPQ) formam um <strong>espaço integrado</strong>, comunicado diretamente por uma porta de correr. Ambos são acessados pelos estudantes de graduação de forma contínua durante as disciplinas práticas.</p>
+        <p>O Laboratório Didático é um espaço amplo, com pé direito elevado, ralos de grande abertura distribuídos pelo piso e uma área com computadores para simulação. O DPQ, de pé direito convencional, está organizado em três subespaços: o ambiente principal com bancadas e equipamentos, uma sala de balança e armazenamento, e uma sala de computação.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">👥</span>Fluxo de usuários</h3>
+        <p>O Laboratório Didático atende habitualmente três turmas de aproximadamente <strong>21 alunos</strong> cada, subdivididas em grupos de 4 a 5 estudantes. Múltiplos experimentos distintos podem ocorrer simultaneamente, com ao menos um técnico e um professor responsáveis por sessão.</p>
+        <p>O DPQ atende turmas de até 50 alunos distribuídas em dois momentos semanais. As atividades variam consideravelmente: enquanto alguns grupos realizam experimentos bioquímicos, outros trabalham em simulações computacionais ou conduzem experimentos com geração de gases.</p>
+        <div class="alert warning">
+          <div class="alert-icon">⚠️</div>
+          <div>A natureza simultânea e variada das atividades exige atenção constante ao que está acontecendo ao seu redor, não apenas na sua bancada.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">⚗️</span>Disciplinas e experimentos</h3>
+        <p>O espaço didático atende disciplinas de <strong>Fenômenos de Transportes</strong>, <strong>Operações Unitárias</strong> e <strong>Engenharia das Reações</strong>. Os experimentos incluem circuitos hidráulicos, leito fluidizado, moinhos, destilação, reatores de mistura, experimentos enzimáticos, fermentação alcoólica e rompimento celular por alta pressão.</p>
+        <p>No DPQ, as atividades das disciplinas de <strong>Desenvolvimento de Processos Químicos I e II</strong> variam em função do projeto de cada grupo e da orientação docente, incluindo operações com chamas, experimentos bioquímicos e biodigestores.</p>
+      </div>
+
+      <div class="alert info">
+        <div class="alert-icon">ℹ️</div>
+        <div>Os kits didáticos são estruturas móveis que mudam de posição a cada semestre conforme as atividades planejadas. Por isso, os riscos presentes no laboratório <strong>não são sempre nos mesmos lugares</strong>. Consulte sempre o Mapa de Riscos atualizado fixado no espaço.</div>
+      </div>
+
+      <div class="checkpoint">
+        <h4>✔ Verificação de aprendizado</h4>
+        <div class="q-text">Por que os riscos químicos e biológicos do Laboratório Didático não estão fixados em um local específico no Mapa de Riscos?</div>
+        <div class="cp-options">
+          <button class="cp-option" onclick="checkCp(this, false)">Porque são riscos de baixa prioridade</button>
+          <button class="cp-option" onclick="checkCp(this, true)">Porque os kits didáticos são móveis e sua disposição muda a cada semestre</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Porque esses riscos não existem no laboratório didático</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Porque o Mapa de Riscos não cobre riscos químicos</button>
+        </div>
+        <div class="cp-feedback">✅ Exato! A mobilidade dos kits torna o perfil de risco dinâmico, exigindo atenção a cada novo arranjo do espaço.</div>
+      </div>
+
+      <button class="btn-next" onclick="completeModule('m2','m3')">Próximo módulo →</button>
+    </div>
+
+    <!-- ══ MÓDULO 3 ══ -->
+    <div class="screen" id="screen-m3">
+      <div class="module-eyebrow">Módulo 3 de 5</div>
+      <h2 class="module-title">Riscos Identificados no Espaço</h2>
+
+      <div class="video-placeholder">
+        <div class="video-badge">📹 Vídeo</div>
+        <div class="video-inner">
+          <div class="video-play-btn">▶</div>
+          <div class="video-label">Identificação de Riscos no Laboratório Didático e DPQ<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🔊</span>Riscos Físicos — Ruído</h3>
+        <div class="risk-tags"><span class="risk-tag tag-fisico">Risco Físico</span></div>
+        <p style="margin-top:12px">Os moinhos e sopradores utilizados nos experimentos de análise granulométrica e leito fluidizado geram níveis elevados de pressão sonora. A <strong>NR-15 (Anexo I)</strong> estabelece os limites máximos de exposição diária a ruído contínuo. A exposição prolongada sem proteção auditiva pode causar perda auditiva ocupacional progressiva e irreversível.</p>
+        <div class="alert danger">
+          <div class="alert-icon">🔴</div>
+          <div><strong>Obrigatório:</strong> uso de protetor auricular durante toda a operação de moinhos e sopradores.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🔥</span>Riscos Físicos — Calor</h3>
+        <div class="risk-tags"><span class="risk-tag tag-fisico">Risco Físico</span></div>
+        <p style="margin-top:12px">Muflas, estufas e a autoclave do DPQ atingem temperaturas muito elevadas durante os processos de secagem, esterilização e tratamento térmico. O contato direto com superfícies aquecidas ou com materiais recém-retirados é o principal risco imediato.</p>
+        <p>A autoclave opera adicionalmente sob pressão acumulada, sendo enquadrada nos critérios da <strong>NR-13</strong>. Nunca abra uma autoclave sem verificar que a pressão interna está zerada.</p>
+        <div class="alert danger">
+          <div class="alert-icon">🔴</div>
+          <div><strong>Nunca</strong> retire materiais de equipamentos de aquecimento sem luvas resistentes ao calor. <strong>Nunca</strong> abra a autoclave sob pressão.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">⚙️</span>Riscos Mecânicos e Ergonômicos</h3>
+        <div class="risk-tags"><span class="risk-tag tag-mecanico">Mecânico</span><span class="risk-tag tag-ergonomico">Ergonômico</span></div>
+        <p style="margin-top:12px">Os kits didáticos são estruturas metálicas e de madeira de grande porte que precisam ser reposicionadas entre experimentos. A movimentação sem protocolo adequado cria risco de queda de carga, esmagamento e lesões musculoesqueléticas.</p>
+        <p>Alguns kits contêm <strong>manômetros de mercúrio em tubos de vidro</strong>. O mercúrio é altamente tóxico por inalação e absorção cutânea. Em caso de ruptura, abandone a área, ventile o espaço e acione o técnico responsável imediatamente.</p>
+        <div class="alert warning">
+          <div class="alert-icon">⚠️</div>
+          <div>Nunca mova um kit didático sozinho. Utilize calçado fechado e resistente durante as aulas práticas.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🧪</span>Riscos Químicos</h3>
+        <div class="risk-tags"><span class="risk-tag tag-quimico">Risco Químico</span></div>
+        <p style="margin-top:12px">O DPQ concentra substâncias tóxicas, corrosivas e inflamáveis, incluindo substâncias controladas que demandam protocolos adicionais de segurança. Consulte sempre a <strong>Ficha com Dados de Segurança (FDS)</strong> antes de manipular qualquer substância — ela está disponível no site da Comissão de Segurança.</p>
+        <p>A manipulação de substâncias voláteis deve ocorrer <strong>sempre dentro da capela de exaustão</strong>. A NR-26 e o GHS (Sistema Globalmente Harmonizado) regulamentam a rotulagem e a comunicação de risco de todas as substâncias presentes.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🦠</span>Riscos Biológicos</h3>
+        <div class="risk-tags"><span class="risk-tag tag-biologico">Risco Biológico</span></div>
+        <p style="margin-top:12px">Experimentos com reatores e biorreatores envolvem a manipulação de microrganismos, incluindo leveduras e bactérias. Descarte adequadamente todo material biológico conforme as instruções do roteiro experimental. Nunca pipete com a boca.</p>
+      </div>
+
+      <div class="checkpoint">
+        <h4>✔ Verificação de aprendizado</h4>
+        <div class="q-text">O que fazer imediatamente em caso de ruptura de um manômetro de mercúrio durante um experimento?</div>
+        <div class="cp-options">
+          <button class="cp-option" onclick="checkCp(this, false)">Limpar o mercúrio derramado com papel toalha</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Continuar o experimento e informar o professor ao final</button>
+          <button class="cp-option" onclick="checkCp(this, true)">Abandonar a área, ventilar o espaço e acionar o técnico responsável imediatamente</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Cobrir o mercúrio com areia e continuar</button>
+        </div>
+        <div class="cp-feedback">✅ Correto! O mercúrio é altamente tóxico por inalação de vapores. O espaço deve ser evacuado e ventilado imediatamente antes de qualquer tentativa de contenção.</div>
+      </div>
+
+      <button class="btn-next" onclick="completeModule('m3','m4')">Próximo módulo →</button>
+    </div>
+
+    <!-- ══ MÓDULO 4 ══ -->
+    <div class="screen" id="screen-m4">
+      <div class="module-eyebrow">Módulo 4 de 5</div>
+      <h2 class="module-title">EPIs, Mapa de Riscos e Sinalização</h2>
+
+      <div class="video-placeholder">
+        <div class="video-badge">📹 Vídeo</div>
+        <div class="video-inner">
+          <div class="video-play-btn">▶</div>
+          <div class="video-label">Uso Correto dos EPIs no Laboratório Didático<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🦺</span>EPIs obrigatórios no espaço</h3>
+        <p>Os seguintes equipamentos são de uso obrigatório durante as atividades práticas. Verificar seus EPIs antes de entrar no laboratório é sua primeira responsabilidade como usuário do espaço:</p>
+        <div class="epi-grid">
+          <div class="epi-card"><span class="epi-icon">🥽</span>Óculos de proteção</div>
+          <div class="epi-card"><span class="epi-icon">🧥</span>Jaleco de algodão</div>
+          <div class="epi-card"><span class="epi-icon">🧤</span>Luvas (conforme substância)</div>
+          <div class="epi-card"><span class="epi-icon">👟</span>Calçado fechado</div>
+          <div class="epi-card"><span class="epi-icon">🔇</span>Protetor auricular (ruído)</div>
+          <div class="epi-card"><span class="epi-icon">🔥</span>Luva térmica (calor)</div>
+        </div>
+        <div class="alert warning" style="margin-top:14px">
+          <div class="alert-icon">⚠️</div>
+          <div>O tipo de luva varia conforme a substância manipulada. Consulte a FDS antes de escolher. Luvas de látex não protegem contra muitos solventes orgânicos.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🗺️</span>Lendo o Mapa de Riscos</h3>
+        <p>O Mapa de Riscos está fixado na entrada do laboratório e mostra a distribuição espacial dos perigos. Familiarize-se com ele antes de cada aula. A legenda segue o padrão da NR-26:</p>
+        <div class="steps" style="margin-top:8px">
+          <div class="step"><div class="step-num" style="background:#1E6B3C">▬</div><div>Linha verde — Risco físico (ruído, calor, temperatura)</div></div>
+          <div class="step"><div class="step-num" style="background:#B91C1C">▬</div><div>Linha vermelha — Risco químico (substâncias, vapores)</div></div>
+          <div class="step"><div class="step-num" style="background:#E8960C">▬</div><div>Linha amarela — Risco ergonômico (kits, cargas)</div></div>
+          <div class="step"><div class="step-num" style="background:#1E40AF">▬</div><div>Linha azul — Risco mecânico e de acidentes</div></div>
+          <div class="step"><div class="step-num" style="background:#7C3AED">▬</div><div>Linha roxa — Risco biológico</div></div>
+        </div>
+        <p style="margin-top:12px">O tamanho dos círculos indica a intensidade: círculo maior = risco alto e não controlado; círculo médio = risco relevante e controlável; círculo menor = risco baixo ou já controlado.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🚪</span>Sinalização e infraestrutura de emergência</h3>
+        <p>Ao entrar no laboratório pela primeira vez, identifique a localização de:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div>Saídas de emergência — identificadas por placas verdes de saída</div></div>
+          <div class="step"><div class="step-num">2</div><div>Extintores — consulte o Mapa de Riscos para localização</div></div>
+          <div class="step"><div class="step-num">3</div><div>Lava-olhos e chuveiro de emergência — consulte o Mapa de Riscos</div></div>
+          <div class="step"><div class="step-num">4</div><div>Kit de primeiros socorros — pergunte ao técnico responsável</div></div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <h4>✔ Verificação de aprendizado</h4>
+        <div class="q-text">Qual a função do círculo de tamanho maior no Mapa de Riscos?</div>
+        <div class="cp-options">
+          <button class="cp-option" onclick="checkCp(this, false)">Indicar que o risco é biológico</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Indicar que o risco já está controlado</button>
+          <button class="cp-option" onclick="checkCp(this, true)">Indicar que o risco é alto e não controlado</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Indicar a localização dos extintores</button>
+        </div>
+        <div class="cp-feedback">✅ Correto! No padrão do Mapa de Riscos, o tamanho do círculo representa a intensidade do risco — maior significa mais grave e/ou não controlado.</div>
+      </div>
+
+      <button class="btn-next" onclick="completeModule('m4','m5')">Próximo módulo →</button>
+    </div>
+
+    <!-- ══ MÓDULO 5 ══ -->
+    <div class="screen" id="screen-m5">
+      <div class="module-eyebrow">Módulo 5 de 5</div>
+      <h2 class="module-title">Emergências e Canal de Reporte</h2>
+
+      <div class="video-placeholder">
+        <div class="video-badge">📹 Vídeo</div>
+        <div class="video-inner">
+          <div class="video-play-btn">▶</div>
+          <div class="video-label">Procedimentos em Caso de Acidente no Laboratório<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🔥</span>Em caso de incêndio</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div>Acione o alarme de incêndio ou chame atenção verbalmente</div></div>
+          <div class="step"><div class="step-num">2</div><div>Evacue o laboratório pela saída de emergência mais próxima</div></div>
+          <div class="step"><div class="step-num">3</div><div>Não utilize elevadores — use sempre as escadas</div></div>
+          <div class="step"><div class="step-num">4</div><div>Aguarde no ponto de encontro externo e aguarde orientação</div></div>
+          <div class="step"><div class="step-num">5</div><div>Somente use o extintor se tiver treinamento e a saída estiver livre</div></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🩹</span>Em caso de contato com substância química</h3>
+        <div class="alert danger">
+          <div class="alert-icon">🔴</div>
+          <div><strong>Olhos:</strong> Lave imediatamente no lava-olhos por no mínimo 15 minutos com água corrente. Não esfregue.</div>
+        </div>
+        <div class="alert danger" style="margin-top:8px">
+          <div class="alert-icon">🔴</div>
+          <div><strong>Pele:</strong> Lave com água corrente por no mínimo 15 minutos. Se necessário, use o chuveiro de emergência. Retire roupas contaminadas.</div>
+        </div>
+        <div class="alert warning" style="margin-top:8px">
+          <div class="alert-icon">⚠️</div>
+          <div>Em qualquer caso, informe o professor ou técnico responsável imediatamente e consulte a FDS da substância para orientações específicas de primeiros socorros.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🩺</span>Em caso de queimadura</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div>Resfrie a área queimada com água corrente fria por 10 a 20 minutos</div></div>
+          <div class="step"><div class="step-num">2</div><div>Não aplique pasta de dente, manteiga ou qualquer outra substância</div></div>
+          <div class="step"><div class="step-num">3</div><div>Informe o professor ou técnico e procure atendimento médico</div></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">📋</span>Canal de Reporte de Incidentes</h3>
+        <p>A Comissão de Segurança do DEQ disponibiliza um <strong>canal de reporte voluntário</strong> de incidentes, quase-acidentes e condições de risco. O reporte pode ser feito de forma anônima e é fundamental para que o departamento aprenda com os desvios e melhore continuamente suas condições de segurança.</p>
+        <div class="alert success">
+          <div class="alert-icon">✅</div>
+          <div><strong>Reportar não é delatar.</strong> Incidentes não reportados deixam buracos abertos no sistema de defesa, que podem causar acidentes graves no futuro. Seu reporte protege a próxima turma.</div>
+        </div>
+        <div class="alert info" style="margin-top:8px">
+          <div class="alert-icon">🔗</div>
+          <div>Acesse o formulário de reporte diretamente no site da Comissão de Segurança do DEQ ou via QR Code disponível na entrada do laboratório.</div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <h4>✔ Verificação de aprendizado</h4>
+        <div class="q-text">Em caso de contato de substância química com os olhos, qual é o procedimento correto?</div>
+        <div class="cp-options">
+          <button class="cp-option" onclick="checkCp(this, false)">Esfregue os olhos com um pano limpo</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Aplique colírio e aguarde o fim da aula para consultar um médico</button>
+          <button class="cp-option" onclick="checkCp(this, true)">Lave imediatamente no lava-olhos por no mínimo 15 minutos, sem esfregar</button>
+          <button class="cp-option" onclick="checkCp(this, false)">Lave rapidamente com água e continue o experimento</button>
+        </div>
+        <div class="cp-feedback">✅ Correto! A lavagem imediata e prolongada é essencial para reduzir a exposição. Informe o responsável e consulte a FDS para orientações adicionais.</div>
+      </div>
+
+      <button class="btn-next" onclick="completeModule('m5','quiz')">Ir para a Avaliação Final →</button>
+    </div>
+
+    <!-- ══ QUIZ ══ -->
+    <div class="screen" id="screen-quiz">
+      <div class="quiz-header">
+        <h2>📝 Avaliação Final</h2>
+        <p>Responda as 10 questões abaixo. Você precisa acertar pelo menos 7 (70%) para concluir o curso.</p>
+        <div class="quiz-progress-row">
+          <span class="quiz-counter" id="quizCounter">Questão 1 de 10</span>
+          <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="quizBar"></div></div>
+        </div>
+      </div>
+
+      <div id="quizContainer"></div>
+
+      <button class="btn-quiz-next" id="btnQuizNext" onclick="nextQuestion()" disabled>Próxima questão →</button>
+    </div>
+
+    <!-- ══ RESULT ══ -->
+    <div class="screen" id="screen-result">
+      <div class="result-card">
+        <div class="result-score-ring">
+          <span class="score-num" id="resultNum">0</span>
+          <span class="score-tot" id="resultTot">de 10</span>
+        </div>
+        <h2 class="result-title" id="resultTitle">Parabéns!</h2>
+        <div class="result-badge" id="resultBadge"></div>
+        <p class="result-msg" id="resultMsg"></p>
+        <button class="btn-restart" onclick="restartQuiz()">↩ Refazer a avaliação</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // ─── STATE ───
+  const completed = new Set();
+  let currentScreen = 'welcome';
+
+  const MODULES = ['m1','m2','m3','m4','m5'];
+  const TOTAL_STEPS = MODULES.length + 1; // +1 for quiz
+
+  // ─── NAVIGATION ───
+  function goTo(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+
+    document.querySelectorAll('.module-nav-item, .quiz-nav-item').forEach(el => el.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
+
+    currentScreen = id;
+    updateProgress();
+    window.scrollTo(0, 0);
+  }
+
+  function completeModule(from, to) {
+    completed.add(from);
+    const navEl = document.getElementById('nav-' + from);
+    if (navEl) {
+      navEl.classList.add('completed');
+      navEl.querySelector('.nav-icon').textContent = '✓';
+    }
+    updateProgress();
+    goTo(to);
+  }
+
+  function updateProgress() {
+    const done = completed.size + (completed.has('quiz') ? 0 : 0);
+    const pct = Math.round((completed.size / TOTAL_STEPS) * 100);
+    document.getElementById('mainProgress').style.width = pct + '%';
+    document.getElementById('mainProgressLabel').textContent = pct + '%';
+  }
+
+  // ─── CHECKPOINT ───
+  function checkCp(btn, correct) {
+    const parent = btn.closest('.cp-options');
+    parent.querySelectorAll('.cp-option').forEach(b => { b.disabled = true; });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    if (!correct) {
+      parent.querySelectorAll('.cp-option').forEach(b => {
+        if (b.dataset.correct === 'true') b.classList.add('correct');
+      });
+    }
+    const fb = btn.closest('.checkpoint').querySelector('.cp-feedback');
+    if (fb) fb.style.display = 'block';
+  }
+
+  // ─── QUIZ DATA ───
+  const questions = [
+    {
+      q: "Na Hierarquia de Controles, qual nível é considerado o menos confiável para proteção do trabalhador?",
+      opts: ["Controles de Engenharia", "Substituição", "Equipamento de Proteção Individual (EPI)", "Controles Administrativos"],
+      correct: 2,
+      fb: "O EPI é o último recurso na hierarquia — depende inteiramente do comportamento individual do operador a cada momento de uso."
+    },
+    {
+      q: "O Modelo do Queijo Suíço, de James Reason, representa:",
+      opts: ["Uma dieta recomendada para pesquisadores de segurança", "Um sistema de barreiras de defesa com falhas latentes que, ao se alinharem, causam acidentes", "Um protocolo de descarte de resíduos de laboratório", "A classificação de substâncias perigosas pelo GHS"],
+      correct: 1,
+      fb: "Cada 'fatia' representa uma barreira de defesa. Os buracos são falhas latentes. O acidente ocorre quando todos os buracos se alinham, permitindo que a trajetória de risco atravesse todas as defesas."
+    },
+    {
+      q: "O que é a 'normalização do desvio' no contexto da segurança laboratorial?",
+      opts: ["A padronização de procedimentos operacionais seguros", "A aceitação gradual de práticas inseguras como normais, sem reação institucional", "O processo de calibração de instrumentos de medição", "O registro formal de desvios de temperatura nos experimentos"],
+      correct: 1,
+      fb: "Quando pequenos desvios não encontram nenhuma resposta institucional, eles progressivamente deixam de ser percebidos como problemas e se tornam a norma do grupo."
+    },
+    {
+      q: "Qual norma regulamentadora estabelece os limites máximos de exposição diária a ruído contínuo?",
+      opts: ["NR-13", "NR-17", "NR-26", "NR-15"],
+      correct: 3,
+      fb: "A NR-15 (Atividades e Operações Insalubres), em seu Anexo I, estabelece os limites de tolerância para ruído contínuo ou intermitente em função do nível de pressão sonora em dB(A)."
+    },
+    {
+      q: "Em qual situação os riscos químicos e biológicos no Laboratório Didático se tornam presentes?",
+      opts: ["Apenas quando a autoclave está em operação", "Apenas durante experimentos no DPQ", "Durante experimentos de reatores e biorreatores, que podem ocorrer em diferentes locais conforme a disposição dos kits", "Somente quando o técnico autoriza o acesso à área química"],
+      correct: 2,
+      fb: "Os kits didáticos são móveis e sua disposição muda a cada semestre. Por isso, os riscos químicos e biológicos associados a esses experimentos não têm localização fixa no Mapa de Riscos."
+    },
+    {
+      q: "O Procedimento Operacional Padrão (POP) é classificado na Hierarquia de Controles como:",
+      opts: ["Controle de Engenharia", "Eliminação do risco", "Controle Administrativo", "Equipamento de Proteção Individual"],
+      correct: 2,
+      fb: "O POP regulamenta o comportamento humano por meio de procedimentos padronizados — definição de Controle Administrativo. Ele complementa, mas não substitui, os controles de engenharia e os EPIs."
+    },
+    {
+      q: "Em caso de contato de substância química com os olhos, o procedimento correto é:",
+      opts: ["Esfregue os olhos com um pano limpo e aplique colírio", "Lave imediatamente no lava-olhos com água corrente por no mínimo 15 minutos, sem esfregar", "Lave rapidamente com água e informe o professor ao final da aula", "Aplique pomada oftálmica e aguarde atendimento médico"],
+      correct: 1,
+      fb: "A lavagem imediata e prolongada é essencial para reduzir a concentração da substância no olho. Esfregá-lo agrava a lesão. Após a lavagem, informe o responsável e consulte a FDS."
+    },
+    {
+      q: "Por que as Fichas com Dados de Segurança (FDS) devem estar acessíveis no ponto de uso?",
+      opts: ["Por ser apenas um requisito burocrático da NR-26 sem aplicação prática", "Para que os usuários possam consultar as propriedades físicas das substâncias para os cálculos do experimento", "Para que o usuário conheça os perigos e as medidas de emergência antes e durante a manipulação da substância", "Apenas para registro histórico em caso de fiscalização"],
+      correct: 2,
+      fb: "A FDS contém informações críticas sobre perigos, EPIs adequados, procedimentos de primeiros socorros e medidas de emergência. Consultá-la antes da manipulação é parte essencial da rotina segura."
+    },
+    {
+      q: "O que o círculo de maior tamanho no Mapa de Riscos indica?",
+      opts: ["Que o risco é de natureza biológica", "Que o risco é alto e não controlado, exigindo atenção prioritária", "Que existe um extintor próximo àquela área", "Que o risco já foi eliminado por medidas de engenharia"],
+      correct: 1,
+      fb: "No padrão adotado pelo Mapa de Riscos do DEQ/UFSCar, o tamanho do círculo representa a intensidade do risco: maior = alto e não controlado; médio = relevante e controlável; menor = baixo ou já controlado."
+    },
+    {
+      q: "Qual é a principal razão para reportar incidentes e quase-acidentes ao canal da Comissão de Segurança?",
+      opts: ["Para punir os responsáveis pelo ocorrido", "Para cumprir uma exigência formal sem relevância prática", "Para que o departamento possa aprender com os desvios, corrigir suas causas e evitar acidentes futuros", "Para registrar o histórico apenas para fins de pesquisa acadêmica"],
+      correct: 2,
+      fb: "Incidentes não reportados são alertas silenciados. Sem registro e análise, o departamento não pode identificar as vulnerabilidades do seu sistema antes que causem um acidente grave."
+    }
+  ];
+
+  // ─── QUIZ LOGIC ───
+  let qIndex = 0;
+  let score  = 0;
+  let answered = false;
+
+  function renderQuestion() {
+    const q = questions[qIndex];
+    document.getElementById('quizCounter').textContent = `Questão ${qIndex + 1} de ${questions.length}`;
+    document.getElementById('quizBar').style.width = ((qIndex / questions.length) * 100) + '%';
+    document.getElementById('btnQuizNext').disabled = true;
+
+    const letters = ['A', 'B', 'C', 'D'];
+    const html = `
+      <div class="question-card">
+        <div class="q-eyebrow">Questão ${qIndex + 1}</div>
+        <div class="q-question">${q.q}</div>
+        <div class="q-options">
+          ${q.opts.map((opt, i) => `
+            <button class="q-option" onclick="selectAnswer(this, ${i}, ${q.correct})" id="opt-${i}">
+              <span class="opt-letter">${letters[i]}</span>${opt}
+            </button>
+          `).join('')}
+        </div>
+        <div class="q-feedback" id="qFeedback"></div>
+      </div>
+    `;
+    document.getElementById('quizContainer').innerHTML = html;
+    answered = false;
+
+    const btnNext = document.getElementById('btnQuizNext');
+    btnNext.textContent = qIndex < questions.length - 1 ? 'Próxima questão →' : 'Ver resultado →';
+  }
+
+  function selectAnswer(btn, chosen, correct) {
+    if (answered) return;
+    answered = true;
+
+    document.querySelectorAll('.q-option').forEach(b => b.disabled = true);
+    btn.classList.add(chosen === correct ? 'correct' : 'wrong');
+    document.getElementById('opt-' + correct).classList.add('correct');
+
+    if (chosen === correct) score++;
+
+    const fb = document.getElementById('qFeedback');
+    fb.classList.add('show', chosen === correct ? 'ok' : 'err');
+    fb.textContent = (chosen === correct ? '✅ ' : '❌ Resposta incorreta. ') + questions[qIndex].fb;
+
+    document.getElementById('btnQuizNext').disabled = false;
+  }
+
+  function nextQuestion() {
+    if (!answered) return;
+    qIndex++;
+    if (qIndex < questions.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    completed.add('quiz');
+    updateProgress();
+    document.getElementById('quizBar').style.width = '100%';
+
+    const pass = score >= 7;
+    document.getElementById('resultNum').textContent = score;
+    document.getElementById('resultTot').textContent = `de ${questions.length}`;
+    document.getElementById('resultTitle').textContent = pass ? '🎉 Aprovado(a)!' : 'Revise o conteúdo';
+    document.getElementById('resultBadge').className = 'result-badge ' + (pass ? 'badge-pass' : 'badge-fail');
+    document.getElementById('resultBadge').textContent = pass
+      ? `✓ Aprovado — ${score}/10 corretas`
+      : `✗ ${score}/10 corretas — mínimo: 7`;
+    document.getElementById('resultMsg').textContent = pass
+      ? 'Você concluiu o Curso de Integração Laboratorial do DEQ/UFSCar. Apresente este resultado ao técnico responsável antes do seu primeiro acesso ao laboratório.'
+      : 'Você não atingiu a nota mínima de 70%. Revise os módulos indicados e refaça a avaliação. Lembre-se: o objetivo é garantir que você chegue ao laboratório preparado.';
+
+    goTo('result');
+  }
+
+  function restartQuiz() {
+    qIndex = 0;
+    score  = 0;
+    answered = false;
+    renderQuestion();
+    goTo('quiz');
+  }
+
+  // ─── INIT ───
+  goTo('welcome');
+  renderQuestion();
+</script>
+</body>
+</html>
