@@ -415,6 +415,45 @@
       display: none;
     }
 
+    /* MINI QUIZ CAROUSEL (fim de módulo) */
+    .mini-quiz-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .mini-quiz-nav { display: flex; gap: 7px; order: 3; width: 100%; justify-content: center; margin-top: 4px; }
+    @media (min-width: 560px) {
+      .mini-quiz-nav { order: 0; width: auto; margin-top: 0; }
+    }
+    .mini-quiz-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .mini-quiz-dot.active { background: var(--amber); transform: scale(1.25); }
+    .mini-quiz-dot.correct { background: #4ADE80; }
+    .mini-quiz-dot.wrong { background: #F87171; }
+    .mini-quiz-btn {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.3);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 700;
+      transition: all .2s;
+    }
+    .mini-quiz-btn:hover:not(:disabled) { background: rgba(255,255,255,.2); }
+    .mini-quiz-btn:disabled { opacity: .35; cursor: not-allowed; }
+    .mini-quiz-eyebrow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+    .mini-quiz-score { font-size: 11px; font-weight: 700; color: var(--amber); opacity: .9; text-transform: none; letter-spacing: 0; }
+
     /* NEXT BUTTON */
     .btn-next {
       display: inline-flex;
@@ -673,40 +712,40 @@
     <div class="module-nav-item" onclick="goTo('m1')" id="nav-m1">
       <div class="nav-icon">1</div>
       <div class="nav-text">
-        <strong>Fundamentos de Segurança</strong>
-        <span>Hierarquia · Queijo Suíço</span>
+        <strong>EPIs, EPCs e Hierarquia de Controles</strong>
+        <span>Camadas de proteção no laboratório</span>
       </div>
     </div>
 
     <div class="module-nav-item" onclick="goTo('m2')" id="nav-m2">
       <div class="nav-icon">2</div>
       <div class="nav-text">
-        <strong>O Espaço Laboratorial</strong>
-        <span>Laboratório Didático e DPQ</span>
+        <strong>Saídas de Emergência e Rotas de Fuga</strong>
+        <span>Sinalização, alarme e evacuação</span>
       </div>
     </div>
 
     <div class="module-nav-item" onclick="goTo('m3')" id="nav-m3">
       <div class="nav-icon">3</div>
       <div class="nav-text">
-        <strong>Riscos Identificados</strong>
-        <span>Físicos · Químicos · Mecânicos</span>
+        <strong>Manuseio Seguro de Substâncias Químicas</strong>
+        <span>Rótulos, GHS e FDS</span>
       </div>
     </div>
 
     <div class="module-nav-item" onclick="goTo('m4')" id="nav-m4">
       <div class="nav-icon">4</div>
       <div class="nav-text">
-        <strong>EPIs e Sinalização</strong>
-        <span>Proteção individual e coletiva</span>
+        <strong>Procedimentos de Emergência</strong>
+        <span>Incêndio, derramamento e lesões</span>
       </div>
     </div>
 
     <div class="module-nav-item" onclick="goTo('m5')" id="nav-m5">
       <div class="nav-icon">5</div>
       <div class="nav-text">
-        <strong>Emergências e Reporte</strong>
-        <span>Protocolos e canal de incidentes</span>
+        <strong>Cultura de Segurança e Reporte</strong>
+        <span>Comportamento e canal de incidentes</span>
       </div>
     </div>
 
@@ -727,8 +766,8 @@
     <div class="screen active" id="screen-welcome">
       <div class="welcome-hero">
         <div class="wh-label">Bem-vindo(a) ao curso</div>
-        <h2>Segurança Laboratorial para Estudantes Ingressantes</h2>
-        <p>Antes de acessar o Laboratório Didático e o DPQ, todos os estudantes devem concluir este curso e obter aprovação na avaliação final. Ele foi desenvolvido com base no diagnóstico de segurança realizado neste departamento.</p>
+        <h2>Curso Introdutório de Segurança Laboratorial do DEQ/UFSCar</h2>
+        <p>Antes de acessar o Laboratório Didático e o DPQ, todos os estudantes devem concluir este curso e obter aprovação na avaliação final. Ao longo de 5 módulos, você vai aprender sobre EPIs e EPCs, rotas de fuga, manuseio seguro de substâncias químicas, procedimentos de emergência e cultura de segurança.</p>
         <div class="welcome-meta">
           <div class="meta-item">📚 5 módulos</div>
           <div class="meta-item">⏱ ~40 minutos</div>
@@ -739,28 +778,28 @@
 
       <div class="module-cards">
         <div class="module-card" onclick="goTo('m1')">
-          <div class="mc-icon">⚙️</div>
-          <div class="mc-title">Fundamentos de Segurança</div>
+          <div class="mc-icon">🦺</div>
+          <div class="mc-title">EPIs, EPCs e Hierarquia de Controles</div>
           <div class="mc-label">Módulo 1</div>
         </div>
         <div class="module-card" onclick="goTo('m2')">
-          <div class="mc-icon">🏛️</div>
-          <div class="mc-title">O Espaço Laboratorial</div>
+          <div class="mc-icon">🚪</div>
+          <div class="mc-title">Saídas de Emergência e Rotas de Fuga</div>
           <div class="mc-label">Módulo 2</div>
         </div>
         <div class="module-card" onclick="goTo('m3')">
-          <div class="mc-icon">⚠️</div>
-          <div class="mc-title">Riscos Identificados</div>
+          <div class="mc-icon">🧪</div>
+          <div class="mc-title">Manuseio Seguro de Substâncias Químicas</div>
           <div class="mc-label">Módulo 3</div>
         </div>
         <div class="module-card" onclick="goTo('m4')">
-          <div class="mc-icon">🦺</div>
-          <div class="mc-title">EPIs e Sinalização</div>
+          <div class="mc-icon">🚨</div>
+          <div class="mc-title">Procedimentos de Emergência</div>
           <div class="mc-label">Módulo 4</div>
         </div>
         <div class="module-card" onclick="goTo('m5')">
-          <div class="mc-icon">🚨</div>
-          <div class="mc-title">Emergências e Reporte</div>
+          <div class="mc-icon">📋</div>
+          <div class="mc-title">Cultura de Segurança e Reporte</div>
           <div class="mc-label">Módulo 5</div>
         </div>
       </div>
@@ -776,61 +815,87 @@
     <!-- ══ MÓDULO 1 ══ -->
     <div class="screen" id="screen-m1">
       <div class="module-eyebrow">Módulo 1 de 5</div>
-      <h2 class="module-title">Fundamentos de Segurança de Processos</h2>
+      <h2 class="module-title">EPIs, EPCs e Hierarquia de Controles</h2>
 
       <div class="video-placeholder">
         <div class="video-badge">📹 Vídeo</div>
         <div class="video-inner">
           <div class="video-play-btn">▶</div>
-          <div class="video-label">Introdução à Segurança de Processos em Laboratórios Acadêmicos<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+          <div class="video-label">Módulo 1 — EPIs, EPCs e Hierarquia de Controles<br><span style="font-size:12px;opacity:.6">— Vídeo a ser inserido pela Comissão de Segurança —</span></div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🔄</span>Segurança Ocupacional vs. Segurança de Processos</h3>
-        <p>A segurança no laboratório pode ser dividida em duas vertentes complementares. A <strong>segurança ocupacional</strong> foca na proteção imediata do indivíduo contra riscos cotidianos — regula o uso de EPIs e a disponibilidade de equipamentos de proteção coletiva. Já a <strong>segurança de processos</strong> tem caráter mais sistêmico, visando prevenir eventos raros porém catastróficos, como reações descontroladas, explosões e incêndios.</p>
-        <p>Em ambientes acadêmicos, as duas esferas são indissociáveis: você lidará simultaneamente com riscos de manipulação individual e com a operação de instalações em escala piloto.</p>
+        <h3><span class="icon">🧪</span>O laboratório como ambiente de risco</h3>
+        <p>O laboratório é um ambiente de aprendizado, mas também é um ambiente de risco real. Nele você vai trabalhar com substâncias químicas, equipamentos sob pressão e temperatura, fontes de ignição e agentes biológicos. Isso não significa que o laboratório é perigoso por natureza — significa que ele exige preparo. E preparo começa por entender como a proteção funciona.</p>
       </div>
 
       <div class="content-block">
         <h3><span class="icon">🛡️</span>Hierarquia de Controles</h3>
-        <p>A engenharia de segurança organiza as medidas de proteção em cinco níveis, do mais ao menos eficaz:</p>
+        <p>A proteção em um laboratório não depende de um único recurso. Ela é organizada em camadas, do mais eficaz para o menos eficaz. Essa estrutura se chama Hierarquia de Controles:</p>
         <div class="hierarchy">
-          <div class="hierarchy-row hr1"><span class="hr-num">1</span><span class="hr-label">Eliminação</span><span class="hr-rel">Mais eficaz — remove o perigo na fonte</span></div>
-          <div class="hierarchy-row hr2"><span class="hr-num">2</span><span class="hr-label">Substituição</span><span class="hr-rel">Troca por agente ou processo menos perigoso</span></div>
-          <div class="hierarchy-row hr3"><span class="hr-num">3</span><span class="hr-label">Controles de Engenharia</span><span class="hr-rel">Capelas, sistemas automatizados, blindagens</span></div>
-          <div class="hierarchy-row hr4"><span class="hr-num">4</span><span class="hr-label">Controles Administrativos</span><span class="hr-rel">POPs, treinamentos, este curso</span></div>
-          <div class="hierarchy-row hr5"><span class="hr-num">5</span><span class="hr-label">EPI</span><span class="hr-rel">Menos confiável — depende do comportamento individual</span></div>
+          <div class="hierarchy-row hr1"><span class="hr-num">1</span><span class="hr-label">Eliminação</span><span class="hr-rel">Remover o perigo — se a substância não é necessária, ela não deveria estar na bancada</span></div>
+          <div class="hierarchy-row hr2"><span class="hr-num">2</span><span class="hr-label">Substituição</span><span class="hr-rel">Trocar um agente perigoso por um menos arriscado</span></div>
+          <div class="hierarchy-row hr3"><span class="hr-num">3</span><span class="hr-label">Controles de Engenharia (EPCs)</span><span class="hr-rel">Capelas, ventilação, chuveiros de emergência</span></div>
+          <div class="hierarchy-row hr4"><span class="hr-num">4</span><span class="hr-label">Controles Administrativos</span><span class="hr-rel">Procedimentos, treinamentos, sinalizações</span></div>
+          <div class="hierarchy-row hr5"><span class="hr-num">5</span><span class="hr-label">EPI</span><span class="hr-rel">Última barreira entre o perigo e você</span></div>
         </div>
         <div class="alert warning" style="margin-top:14px">
           <div class="alert-icon">⚠️</div>
-          <div>Em laboratórios didáticos, a eliminação e a substituição frequentemente não são opções — o objetivo pedagógico é trabalhar com os próprios equipamentos e substâncias. Por isso, os Controles Administrativos (como os POPs e este curso) e o uso de EPIs ganham importância central.</div>
+          <div>O EPI é a última barreira entre o perigo e você. Por isso, ele não substitui nenhuma das camadas anteriores — ele as complementa.</div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🧀</span>Modelo do Queijo Suíço</h3>
-        <p>Desenvolvido por James Reason, esse modelo representa as defesas de um sistema como fatias de queijo empilhadas em série. Os buracos em cada fatia simbolizam <strong>falhas latentes</strong> — vulnerabilidades inerentes ao sistema que, isoladamente, não causam acidentes.</p>
-        <p>O acidente ocorre quando os buracos de todas as fatias se alinham, permitindo que uma <em>trajetória de risco</em> atravesse todas as defesas sem ser interrompida. Cada barreira que você fortalece — usar o EPI correto, seguir o POP, reportar uma anomalia — reduz a probabilidade desse alinhamento fatal.</p>
+        <h3><span class="icon">🚿</span>EPCs — o que são e onde estão</h3>
+        <p>Os Equipamentos de Proteção Coletiva protegem todos os usuários do espaço ao mesmo tempo, sem depender de uma ação individual. Você precisa saber onde cada um está antes de começar qualquer atividade prática:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">🧯</div><div><strong>Capela de exaustão</strong> — manipulações de substâncias voláteis, tóxicas ou inflamáveis devem ser feitas sempre dentro dela. Nunca realize esse tipo de manipulação fora da capela.</div></div>
+          <div class="step"><div class="step-num">🚿</div><div><strong>Chuveiro de emergência</strong> — acione imediatamente em caso de contato de substâncias químicas com o corpo ou a roupa. Localize-o no primeiro dia de aula.</div></div>
+          <div class="step"><div class="step-num">👁️</div><div><strong>Lava-olhos</strong> — usado em caso de respingos nos olhos. Irrigue por pelo menos 15 minutos. Nunca esfregue os olhos: vá direto ao lava-olhos.</div></div>
+        </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🧠</span>Percepção de Risco e Normalização do Desvio</h3>
-        <p>A percepção de risco tem duas dimensões: a <strong>cognitiva</strong> (conhecimento técnico sobre o perigo) e a <strong>afetiva</strong> (senso de alerta e preocupação). A execução repetida de atividades perigosas sem consequências negativas pode reduzir a resposta afetiva — um processo chamado <strong>habituação ao risco</strong>.</p>
-        <p>Quando pequenos desvios passam a ser aceitos sem reação institucional, instala-se a <strong>normalização do desvio</strong>: práticas inseguras se tornam progressivamente a norma informal do grupo. É por isso que reportar anomalias — mesmo pequenas — é fundamental para a segurança coletiva.</p>
+        <h3><span class="icon">🦺</span>EPIs — tipos e escolha correta</h3>
+        <p>Os Equipamentos de Proteção Individual protegem você contra riscos residuais que os controles anteriores não eliminaram completamente:</p>
+        <div class="epi-grid">
+          <div class="epi-card"><span class="epi-icon">🥼</span>Jaleco de mangas longas</div>
+          <div class="epi-card"><span class="epi-icon">🥽</span>Óculos de proteção</div>
+          <div class="epi-card"><span class="epi-icon">🧤</span>Luvas (conforme a FDS)</div>
+          <div class="epi-card"><span class="epi-icon">👞</span>Sapatos fechados</div>
+          <div class="epi-card"><span class="epi-icon">😷</span>Proteção respiratória</div>
+        </div>
+        <p style="margin-top:12px">Óculos de grau não substituem os óculos de proteção. Luva de látex não protege contra todos os solventes orgânicos — antes de calçar, consulte a FDS da substância para verificar o material indicado.</p>
+        <div class="alert danger">
+          <div class="alert-icon">🔴</div>
+          <div><strong>Usar o EPI errado é tão perigoso quanto não usar nenhum.</strong> A escolha correta começa pela leitura da FDS antes de iniciar o experimento.</div>
+        </div>
       </div>
 
-      <!-- CHECKPOINT -->
+      <div class="content-block">
+        <h3><span class="icon">✅</span>Antes de entrar: a rotina de proteção</h3>
+        <p>Antes de cada atividade prática, adote esta rotina de verificação:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div>Identifiquei todos os perigos associados ao experimento de hoje?</div></div>
+          <div class="step"><div class="step-num">2</div><div>Consultei a FDS das substâncias que vou manipular?</div></div>
+          <div class="step"><div class="step-num">3</div><div>Os EPCs necessários estão disponíveis e funcionando?</div></div>
+          <div class="step"><div class="step-num">4</div><div>Escolhi os EPIs corretos para os riscos específicos desta atividade?</div></div>
+          <div class="step"><div class="step-num">5</div><div>Sei onde estão o chuveiro de emergência, o lava-olhos e o extintor mais próximos?</div></div>
+        </div>
+        <div class="alert warning" style="margin-top:14px">
+          <div class="alert-icon">⚠️</div>
+          <div>Se a resposta a qualquer uma dessas perguntas for não, não inicie o experimento. Busque a informação primeiro.</div>
+        </div>
+      </div>
+
+      <!-- CHECKPOINT — CARROSSEL DE 5 PERGUNTAS -->
       <div class="checkpoint">
-        <h4>✔ Verificação de aprendizado</h4>
-        <div class="q-text">Na Hierarquia de Controles, qual nível é considerado o <em>menos confiável</em>?</div>
-        <div class="cp-options">
-          <button class="cp-option" onclick="checkCp(this, false)">Controles de Engenharia</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Controles Administrativos</button>
-          <button class="cp-option" onclick="checkCp(this, true)">Equipamento de Proteção Individual (EPI)</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Eliminação</button>
+        <div class="mini-quiz-eyebrow">
+          <h4 style="margin:0">✔ Verificação de aprendizado</h4>
+          <span class="mini-quiz-score" id="mq-score-m1"></span>
         </div>
-        <div class="cp-feedback" id="cp-m1-feedback">✅ Correto! O EPI depende inteiramente da adesão individual do operador em cada momento, sendo a barreira mais frágil do sistema.</div>
+        <div id="mq-body-m1"></div>
       </div>
 
       <button class="btn-next" onclick="completeModule('m1','m2')">Próximo módulo →</button>
@@ -839,53 +904,70 @@
     <!-- ══ MÓDULO 2 ══ -->
     <div class="screen" id="screen-m2">
       <div class="module-eyebrow">Módulo 2 de 5</div>
-      <h2 class="module-title">O Espaço Laboratorial: Didático e DPQ</h2>
+      <h2 class="module-title">Identificação de Saídas de Emergência e Rotas de Fuga</h2>
 
       <div class="video-placeholder">
         <div class="video-badge">📹 Vídeo</div>
         <div class="video-inner">
           <div class="video-play-btn">▶</div>
-          <div class="video-label">Tour Virtual pelo Laboratório Didático e DPQ<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+          <div class="video-label">Módulo 2 — Identificação de Saídas de Emergência e Rotas de Fuga<br><span style="font-size:12px;opacity:.6">— Vídeo a ser inserido pela Comissão de Segurança —</span></div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🏛️</span>O complexo integrado</h3>
-        <p>O Laboratório Didático e o Laboratório de Desenvolvimento de Processos Químicos (DPQ) formam um <strong>espaço integrado</strong>, comunicado diretamente por uma porta de correr. Ambos são acessados pelos estudantes de graduação de forma contínua durante as disciplinas práticas.</p>
-        <p>O Laboratório Didático é um espaço amplo, com pé direito elevado, ralos de grande abertura distribuídos pelo piso e uma área com computadores para simulação. O DPQ, de pé direito convencional, está organizado em três subespaços: o ambiente principal com bancadas e equipamentos, uma sala de balança e armazenamento, e uma sala de computação.</p>
+        <h3><span class="icon">⏱️</span>Por que isso importa</h3>
+        <p>Em uma situação de emergência, como um incêndio ou vazamento de gás, você terá poucos segundos para tomar decisões. O instinto natural em situações de pânico é seguir o caminho pelo qual você entrou, mesmo que não seja o mais seguro. Conhecer antecipadamente as rotas de fuga não é opcional: é a diferença entre uma evacuação organizada e uma situação de risco agravado.</p>
+        <div class="alert info">
+          <div class="alert-icon">ℹ️</div>
+          <div>A sinalização formal de rotas de fuga no laboratório didático está em processo de implementação. Até que ela esteja completamente estabelecida, o responsável pelo laboratório deve orientar os estudantes sobre as saídas disponíveis e o caminho recomendado para evacuação antes do início das atividades práticas. Fique atento a essa orientação no seu primeiro dia.</div>
+        </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">👥</span>Fluxo de usuários</h3>
-        <p>O Laboratório Didático atende habitualmente três turmas de aproximadamente <strong>21 alunos</strong> cada, subdivididas em grupos de 4 a 5 estudantes. Múltiplos experimentos distintos podem ocorrer simultaneamente, com ao menos um técnico e um professor responsáveis por sessão.</p>
-        <p>O DPQ atende turmas de até 50 alunos distribuídas em dois momentos semanais. As atividades variam consideravelmente: enquanto alguns grupos realizam experimentos bioquímicos, outros trabalham em simulações computacionais ou conduzem experimentos com geração de gases.</p>
+        <h3><span class="icon">🚦</span>Sinalização de emergência — tipos e cores</h3>
+        <p>A sinalização de segurança segue um padrão de cores estabelecido pela norma regulamentadora NR-26, que você precisa reconhecer imediatamente:</p>
+        <div class="risk-tags">
+          <span class="risk-tag" style="background:#D4EDDA;color:#1E6B3C">🟩 Verde — saídas, rotas de fuga e primeiros socorros</span>
+          <span class="risk-tag" style="background:#FEE2E2;color:#7F1D1D">🟥 Vermelho — combate a incêndio e alarmes</span>
+          <span class="risk-tag" style="background:#FEF3C7;color:#78350F">🟨 Amarelo — atenção e cuidado</span>
+          <span class="risk-tag" style="background:#DBEAFE;color:#1E3A8A">🟦 Azul — obrigatoriedade (ex.: uso de EPI específico)</span>
+        </div>
+        <p style="margin-top:12px">Quando você ver uma placa verde com uma seta ou uma figura humana correndo, esse é o caminho para a saída. Em uma emergência, com fumaça ou visibilidade reduzida, reconhecer a cor de uma placa pode ser mais rápido do que ler seu texto.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🚨</span>Ao ouvir o alarme — os primeiros segundos</h3>
+        <p>Ao ouvir o alarme de emergência, siga esta sequência de forma calma e imediata:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div>Interrompa o experimento com segurança: desligue fontes de calor e ignição, feche frascos abertos e desative equipamentos de risco.</div></div>
+          <div class="step"><div class="step-num">2</div><div>Não perca tempo com pertences — documentos, mochilas e celulares não justificam atraso na evacuação.</div></div>
+          <div class="step"><div class="step-num">3</div><div>Dirija-se à saída de emergência mais próxima seguindo a sinalização verde, sem utilizar elevadores em nenhuma hipótese.</div></div>
+          <div class="step"><div class="step-num">4</div><div>Mantenha-se abaixado se houver fumaça — caminhe agachado em direção à saída, pois o ar mais respirável está próximo ao chão.</div></div>
+          <div class="step"><div class="step-num">5</div><div>Não retorne ao laboratório por nenhum motivo até que a situação seja declarada segura pelas autoridades competentes.</div></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">📍</span>O ponto de encontro</h3>
+        <p>Após evacuar o prédio, dirija-se imediatamente ao ponto de encontro definido para o DEQ/UFSCar — o local preestabelecido onde todos os ocupantes devem se reunir, permitindo que o responsável pela área contabilize os presentes. Permaneça no ponto de encontro até receber orientação formal para retornar ou se dispersar. Não tente reentrar no prédio por conta própria e não obstrua o acesso das equipes de emergência.</p>
         <div class="alert warning">
           <div class="alert-icon">⚠️</div>
-          <div>A natureza simultânea e variada das atividades exige atenção constante ao que está acontecendo ao seu redor, não apenas na sua bancada.</div>
+          <div>Antes do início das suas atividades práticas, confirme com seu professor ou com a Comissão de Segurança qual é o ponto de encontro definido para o seu grupo.</div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">⚗️</span>Disciplinas e experimentos</h3>
-        <p>O espaço didático atende disciplinas de <strong>Fenômenos de Transportes</strong>, <strong>Operações Unitárias</strong> e <strong>Engenharia das Reações</strong>. Os experimentos incluem circuitos hidráulicos, leito fluidizado, moinhos, destilação, reatores de mistura, experimentos enzimáticos, fermentação alcoólica e rompimento celular por alta pressão.</p>
-        <p>No DPQ, as atividades das disciplinas de <strong>Desenvolvimento de Processos Químicos I e II</strong> variam em função do projeto de cada grupo e da orientação docente, incluindo operações com chamas, experimentos bioquímicos e biodigestores.</p>
+        <h3><span class="icon">🤝</span>A responsabilidade coletiva na evacuação</h3>
+        <p>A evacuação eficiente depende do comportamento de todos. Não empurre nem corra em direção à saída: quedas em corredores estreitos podem bloquear a rota para todos. Se perceber alguém desorientado ou com dificuldade de locomoção, oriente-o verbalmente em direção à saída, mas não comprometa sua própria segurança tentando removê-lo fisicamente de uma situação de risco estrutural. Ao sair, avise o responsável mais próximo se souber que alguém ficou para trás.</p>
       </div>
 
-      <div class="alert info">
-        <div class="alert-icon">ℹ️</div>
-        <div>Os kits didáticos são estruturas móveis que mudam de posição a cada semestre conforme as atividades planejadas. Por isso, os riscos presentes no laboratório <strong>não são sempre nos mesmos lugares</strong>. Consulte sempre o Mapa de Riscos atualizado fixado no espaço.</div>
-      </div>
-
+      <!-- CHECKPOINT — CARROSSEL DE 5 PERGUNTAS -->
       <div class="checkpoint">
-        <h4>✔ Verificação de aprendizado</h4>
-        <div class="q-text">Por que os riscos químicos e biológicos do Laboratório Didático não estão fixados em um local específico no Mapa de Riscos?</div>
-        <div class="cp-options">
-          <button class="cp-option" onclick="checkCp(this, false)">Porque são riscos de baixa prioridade</button>
-          <button class="cp-option" onclick="checkCp(this, true)">Porque os kits didáticos são móveis e sua disposição muda a cada semestre</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Porque esses riscos não existem no laboratório didático</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Porque o Mapa de Riscos não cobre riscos químicos</button>
+        <div class="mini-quiz-eyebrow">
+          <h4 style="margin:0">✔ Verificação de aprendizado</h4>
+          <span class="mini-quiz-score" id="mq-score-m2"></span>
         </div>
-        <div class="cp-feedback">✅ Exato! A mobilidade dos kits torna o perfil de risco dinâmico, exigindo atenção a cada novo arranjo do espaço.</div>
+        <div id="mq-body-m2"></div>
       </div>
 
       <button class="btn-next" onclick="completeModule('m2','m3')">Próximo módulo →</button>
@@ -894,71 +976,74 @@
     <!-- ══ MÓDULO 3 ══ -->
     <div class="screen" id="screen-m3">
       <div class="module-eyebrow">Módulo 3 de 5</div>
-      <h2 class="module-title">Riscos Identificados no Espaço</h2>
+      <h2 class="module-title">Manuseio Seguro de Substâncias Químicas</h2>
 
       <div class="video-placeholder">
         <div class="video-badge">📹 Vídeo</div>
         <div class="video-inner">
           <div class="video-play-btn">▶</div>
-          <div class="video-label">Identificação de Riscos no Laboratório Didático e DPQ<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+          <div class="video-label">Módulo 3 — Manuseio Seguro de Substâncias Químicas<br><span style="font-size:12px;opacity:.6">— Vídeo a ser inserido pela Comissão de Segurança —</span></div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🔊</span>Riscos Físicos — Ruído</h3>
-        <div class="risk-tags"><span class="risk-tag tag-fisico">Risco Físico</span></div>
-        <p style="margin-top:12px">Os moinhos e sopradores utilizados nos experimentos de análise granulométrica e leito fluidizado geram níveis elevados de pressão sonora. A <strong>NR-15 (Anexo I)</strong> estabelece os limites máximos de exposição diária a ruído contínuo. A exposição prolongada sem proteção auditiva pode causar perda auditiva ocupacional progressiva e irreversível.</p>
-        <div class="alert danger">
-          <div class="alert-icon">🔴</div>
-          <div><strong>Obrigatório:</strong> uso de protetor auricular durante toda a operação de moinhos e sopradores.</div>
+        <h3><span class="icon">⚗️</span>O risco químico no laboratório</h3>
+        <p>O risco químico é o mais prevalente nos laboratórios de Engenharia Química. Substâncias corrosivas, inflamáveis, tóxicas, oxidantes e reativas estão presentes na rotina do laboratório didático, muitas vezes em combinações que exigem cuidados específicos de manuseio e armazenamento.</p>
+        <p>O erro mais comum entre estudantes ingressantes não é a imprudência deliberada: é iniciar um experimento sem conhecer as propriedades da substância com a qual vão trabalhar. Antes de tocar em qualquer frasco, você precisa saber o que está manipulando, quais riscos essa substância apresenta e o que fazer se algo der errado.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🏷️</span>Rótulos e pictogramas GHS</h3>
+        <p>Todo frasco de reagente deve ter um rótulo padronizado de acordo com o Sistema Globalmente Harmonizado de Classificação e Rotulagem de Produtos Químicos (GHS), regulamentado no Brasil pela ABNT NBR 14725. O rótulo contém:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">📛</div><div>Nome da substância e sua identificação química.</div></div>
+          <div class="step"><div class="step-num">🔺</div><div>Pictogramas de perigo — símbolos dentro de um losango vermelho que indicam a categoria de risco (inflamabilidade, toxicidade aguda, corrosividade, perigo ambiental, entre outros).</div></div>
+          <div class="step"><div class="step-num">❗</div><div>Palavra de advertência — "Perigo" indica riscos mais graves; "Atenção" indica riscos de menor severidade.</div></div>
+          <div class="step"><div class="step-num">H</div><div>Frases de perigo (letra H + números) — descrevem a natureza específica do risco. Ex.: H301 = "Tóxico se ingerido".</div></div>
+          <div class="step"><div class="step-num">P</div><div>Frases de precaução (letra P + números) — orientam medidas preventivas, de resposta a emergências, armazenamento e descarte.</div></div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🔥</span>Riscos Físicos — Calor</h3>
-        <div class="risk-tags"><span class="risk-tag tag-fisico">Risco Físico</span></div>
-        <p style="margin-top:12px">Muflas, estufas e a autoclave do DPQ atingem temperaturas muito elevadas durante os processos de secagem, esterilização e tratamento térmico. O contato direto com superfícies aquecidas ou com materiais recém-retirados é o principal risco imediato.</p>
-        <p>A autoclave opera adicionalmente sob pressão acumulada, sendo enquadrada nos critérios da <strong>NR-13</strong>. Nunca abra uma autoclave sem verificar que a pressão interna está zerada.</p>
-        <div class="alert danger">
-          <div class="alert-icon">🔴</div>
-          <div><strong>Nunca</strong> retire materiais de equipamentos de aquecimento sem luvas resistentes ao calor. <strong>Nunca</strong> abra a autoclave sob pressão.</div>
+        <h3><span class="icon">📄</span>A Ficha com Dados de Segurança (FDS)</h3>
+        <p>A FDS é o documento técnico mais completo sobre uma substância química, composto por 16 seções padronizadas. Você não precisa ler todas antes de cada experimento, mas precisa saber onde encontrar rapidamente as informações críticas:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">2</div><div>Identificação dos perigos — classificação GHS, frases de perigo e precaução.</div></div>
+          <div class="step"><div class="step-num">4</div><div>Primeiros socorros por via de exposição (inalação, pele, olhos, ingestão) — consulte imediatamente após um acidente.</div></div>
+          <div class="step"><div class="step-num">5</div><div>Combate a incêndio — meios de extinção adequados e inadequados para aquela substância.</div></div>
+          <div class="step"><div class="step-num">7</div><div>Manuseio e armazenamento seguros.</div></div>
+          <div class="step"><div class="step-num">8</div><div>EPIs recomendados, incluindo o tipo de luva adequado.</div></div>
+          <div class="step"><div class="step-num">10</div><div>Reatividade e incompatibilidades químicas — quais substâncias não podem ser armazenadas ou misturadas com aquela.</div></div>
         </div>
-      </div>
-
-      <div class="content-block">
-        <h3><span class="icon">⚙️</span>Riscos Mecânicos e Ergonômicos</h3>
-        <div class="risk-tags"><span class="risk-tag tag-mecanico">Mecânico</span><span class="risk-tag tag-ergonomico">Ergonômico</span></div>
-        <p style="margin-top:12px">Os kits didáticos são estruturas metálicas e de madeira de grande porte que precisam ser reposicionadas entre experimentos. A movimentação sem protocolo adequado cria risco de queda de carga, esmagamento e lesões musculoesqueléticas.</p>
-        <p>Alguns kits contêm <strong>manômetros de mercúrio em tubos de vidro</strong>. O mercúrio é altamente tóxico por inalação e absorção cutânea. Em caso de ruptura, abandone a área, ventile o espaço e acione o técnico responsável imediatamente.</p>
-        <div class="alert warning">
+        <div class="alert warning" style="margin-top:14px">
           <div class="alert-icon">⚠️</div>
-          <div>Nunca mova um kit didático sozinho. Utilize calçado fechado e resistente durante as aulas práticas.</div>
+          <div>As FDS de todas as substâncias utilizadas nas disciplinas práticas devem estar acessíveis no laboratório. Se você não as encontrar, solicite ao responsável antes de iniciar o experimento.</div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🧪</span>Riscos Químicos</h3>
-        <div class="risk-tags"><span class="risk-tag tag-quimico">Risco Químico</span></div>
-        <p style="margin-top:12px">O DPQ concentra substâncias tóxicas, corrosivas e inflamáveis, incluindo substâncias controladas que demandam protocolos adicionais de segurança. Consulte sempre a <strong>Ficha com Dados de Segurança (FDS)</strong> antes de manipular qualquer substância — ela está disponível no site da Comissão de Segurança.</p>
-        <p>A manipulação de substâncias voláteis deve ocorrer <strong>sempre dentro da capela de exaustão</strong>. A NR-26 e o GHS (Sistema Globalmente Harmonizado) regulamentam a rotulagem e a comunicação de risco de todas as substâncias presentes.</p>
+        <h3><span class="icon">✅</span>Antes de começar — a rotina de consulta</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div>Li o rótulo da substância e identifiquei seus pictogramas de perigo?</div></div>
+          <div class="step"><div class="step-num">2</div><div>Consultei as seções 2, 4, 8 e 10 da FDS?</div></div>
+          <div class="step"><div class="step-num">3</div><div>Selecionei os EPIs corretos com base na seção 8, especialmente o tipo de luva indicado?</div></div>
+          <div class="step"><div class="step-num">4</div><div>Verifiquei se há substâncias incompatíveis presentes na bancada ou nas proximidades?</div></div>
+          <div class="step"><div class="step-num">5</div><div>Sei qual é o procedimento de descarte correto para os resíduos que serão gerados?</div></div>
+        </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🦠</span>Riscos Biológicos</h3>
-        <div class="risk-tags"><span class="risk-tag tag-biologico">Risco Biológico</span></div>
-        <p style="margin-top:12px">Experimentos com reatores e biorreatores envolvem a manipulação de microrganismos, incluindo leveduras e bactérias. Descarte adequadamente todo material biológico conforme as instruções do roteiro experimental. Nunca pipete com a boca.</p>
+        <h3><span class="icon">🔬</span>Durante o manuseio — boas práticas</h3>
+        <p>Algumas práticas são inegociáveis: realize manipulações de substâncias voláteis, tóxicas ou inflamáveis sempre na capela de exaustão, com o vidro frontal posicionado corretamente e o sistema de exaustão ligado. Trabalhe com a menor quantidade necessária de reagente. Identifique todos os frascos intermediários que você preparar, mesmo que temporariamente. Nunca retorne reagentes utilizados ao frasco original. Ao final, descarte os resíduos nos coletores específicos conforme o tipo de resíduo gerado.</p>
       </div>
 
+      <!-- CHECKPOINT — CARROSSEL DE 5 PERGUNTAS -->
       <div class="checkpoint">
-        <h4>✔ Verificação de aprendizado</h4>
-        <div class="q-text">O que fazer imediatamente em caso de ruptura de um manômetro de mercúrio durante um experimento?</div>
-        <div class="cp-options">
-          <button class="cp-option" onclick="checkCp(this, false)">Limpar o mercúrio derramado com papel toalha</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Continuar o experimento e informar o professor ao final</button>
-          <button class="cp-option" onclick="checkCp(this, true)">Abandonar a área, ventilar o espaço e acionar o técnico responsável imediatamente</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Cobrir o mercúrio com areia e continuar</button>
+        <div class="mini-quiz-eyebrow">
+          <h4 style="margin:0">✔ Verificação de aprendizado</h4>
+          <span class="mini-quiz-score" id="mq-score-m3"></span>
         </div>
-        <div class="cp-feedback">✅ Correto! O mercúrio é altamente tóxico por inalação de vapores. O espaço deve ser evacuado e ventilado imediatamente antes de qualquer tentativa de contenção.</div>
+        <div id="mq-body-m3"></div>
       </div>
 
       <button class="btn-next" onclick="completeModule('m3','m4')">Próximo módulo →</button>
@@ -967,67 +1052,74 @@
     <!-- ══ MÓDULO 4 ══ -->
     <div class="screen" id="screen-m4">
       <div class="module-eyebrow">Módulo 4 de 5</div>
-      <h2 class="module-title">EPIs, Mapa de Riscos e Sinalização</h2>
+      <h2 class="module-title">Procedimentos de Emergência</h2>
 
       <div class="video-placeholder">
         <div class="video-badge">📹 Vídeo</div>
         <div class="video-inner">
           <div class="video-play-btn">▶</div>
-          <div class="video-label">Uso Correto dos EPIs no Laboratório Didático<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+          <div class="video-label">Módulo 4 — Procedimentos de Emergência<br><span style="font-size:12px;opacity:.6">— Vídeo a ser inserido pela Comissão de Segurança —</span></div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🦺</span>EPIs obrigatórios no espaço</h3>
-        <p>Os seguintes equipamentos são de uso obrigatório durante as atividades práticas. Verificar seus EPIs antes de entrar no laboratório é sua primeira responsabilidade como usuário do espaço:</p>
-        <div class="epi-grid">
-          <div class="epi-card"><span class="epi-icon">🥽</span>Óculos de proteção</div>
-          <div class="epi-card"><span class="epi-icon">🧥</span>Jaleco de algodão</div>
-          <div class="epi-card"><span class="epi-icon">🧤</span>Luvas (conforme substância)</div>
-          <div class="epi-card"><span class="epi-icon">👟</span>Calçado fechado</div>
-          <div class="epi-card"><span class="epi-icon">🔇</span>Protetor auricular (ruído)</div>
-          <div class="epi-card"><span class="epi-icon">🔥</span>Luva térmica (calor)</div>
+        <h3><span class="icon">🧭</span>O princípio geral das emergências</h3>
+        <p>Independentemente do tipo de emergência, três princípios orientam qualquer resposta segura:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div><strong>Avaliar</strong> — identifique o que está acontecendo, a extensão do problema e se você tem condições de responder sem colocar sua integridade em risco.</div></div>
+          <div class="step"><div class="step-num">2</div><div><strong>Agir</strong> — tome as medidas imediatas dentro das suas capacidades e dos recursos disponíveis, sem extrapolar seus limites.</div></div>
+          <div class="step"><div class="step-num">3</div><div><strong>Comunicar</strong> — toda emergência deve ser comunicada ao responsável pelo laboratório e, quando necessário, aos serviços externos.</div></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🔥</span>Emergência 1 — Incêndio</h3>
+        <p>Se o fogo for <strong>pequeno e controlado</strong>, restrito a um ponto da bancada, pode ser combatido com o extintor disponível — desde que você conheça seu funcionamento, esteja com os EPIs adequados, tenha uma rota de fuga desobstruída às suas costas e o fogo não envolva substâncias cuja extinção com aquele extintor seja contraindicada. Na dúvida: não tente combater.</p>
+        <p>Se o fogo for <strong>de grande proporção</strong>, se propagar rapidamente, envolver produtos desconhecidos ou houver fumaça densa: evacue imediatamente, acione o alarme, feche portas ao sair e ligue para o Corpo de Bombeiros pelo <strong>193</strong>.</p>
+        <div class="alert danger">
+          <div class="alert-icon">🔴</div>
+          <div>Nunca reabra a porta de um ambiente em chamas — o aporte de oxigênio pode provocar expansão súbita do fogo. Consulte a Seção 5 da FDS para os meios de extinção adequados a cada substância.</div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🧴</span>Emergência 2 — Derramamento de substância química</h3>
+        <p>Para derramamentos <strong>pequenos</strong> sobre a bancada, sem risco de vapores tóxicos significativos, o operador com os EPIs corretos pode conter com materiais absorventes adequados, descartar os resíduos e comunicar o responsável.</p>
+        <p>Para derramamentos <strong>maiores</strong>, ou que envolvam substâncias altamente tóxicas ou voláteis: evacue a área, isole o acesso, ventile o ambiente se possível e acione o responsável e, se necessário, o <strong>CEATOX — 0800 722 6001</strong>.</p>
+        <p>Se a substância atingir a roupa ou a pele, remova a roupa contaminada e vá ao chuveiro de emergência para irrigação prolongada. Se atingir os olhos, vá ao lava-olhos e irrigue por pelo menos 15 minutos, sem esfregar.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🩹</span>Emergência 3 — Acidentes com lesão</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">🩸</div><div><strong>Corte com vidraria:</strong> lave com água corrente e cubra com curativo estéril. Se houver fragmentos, não tente removê-los — busque atendimento médico. Sangramento intenso: acione o SAMU (192).</div></div>
+          <div class="step"><div class="step-num">🔥</div><div><strong>Queimadura térmica leve:</strong> resfrie com água corrente em temperatura ambiente por pelo menos 10 minutos. Não aplique pasta de dente, manteiga ou outra substância. Queimaduras extensas: acione o SAMU.</div></div>
+          <div class="step"><div class="step-num">🧪</div><div><strong>Queimadura química:</strong> irrigue imediatamente com água e consulte a Seção 4 da FDS para procedimentos específicos.</div></div>
         </div>
         <div class="alert warning" style="margin-top:14px">
           <div class="alert-icon">⚠️</div>
-          <div>O tipo de luva varia conforme a substância manipulada. Consulte a FDS antes de escolher. Luvas de látex não protegem contra muitos solventes orgânicos.</div>
+          <div>Em todos os casos: comunique o acidente ao responsável pelo laboratório, independentemente da gravidade, e registre no canal de reporte da Comissão de Segurança.</div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🗺️</span>Lendo o Mapa de Riscos</h3>
-        <p>O Mapa de Riscos está fixado na entrada do laboratório e mostra a distribuição espacial dos perigos. Familiarize-se com ele antes de cada aula. A legenda segue o padrão da NR-26:</p>
-        <div class="steps" style="margin-top:8px">
-          <div class="step"><div class="step-num" style="background:#1E6B3C">▬</div><div>Linha verde — Risco físico (ruído, calor, temperatura)</div></div>
-          <div class="step"><div class="step-num" style="background:#B91C1C">▬</div><div>Linha vermelha — Risco químico (substâncias, vapores)</div></div>
-          <div class="step"><div class="step-num" style="background:#E8960C">▬</div><div>Linha amarela — Risco ergonômico (kits, cargas)</div></div>
-          <div class="step"><div class="step-num" style="background:#1E40AF">▬</div><div>Linha azul — Risco mecânico e de acidentes</div></div>
-          <div class="step"><div class="step-num" style="background:#7C3AED">▬</div><div>Linha roxa — Risco biológico</div></div>
+        <h3><span class="icon">📞</span>Contatos de emergência</h3>
+        <div class="epi-grid">
+          <div class="epi-card"><span class="epi-icon">🚒</span>Bombeiros<br>193</div>
+          <div class="epi-card"><span class="epi-icon">🚑</span>SAMU<br>192</div>
+          <div class="epi-card"><span class="epi-icon">🚓</span>Polícia Militar<br>190</div>
+          <div class="epi-card"><span class="epi-icon">☎️</span>CEATOX<br>0800 722 6001</div>
         </div>
-        <p style="margin-top:12px">O tamanho dos círculos indica a intensidade: círculo maior = risco alto e não controlado; círculo médio = risco relevante e controlável; círculo menor = risco baixo ou já controlado.</p>
+        <p style="margin-top:12px">Salve estes contatos no seu celular antes de iniciar suas atividades práticas. Um princípio fundamental que reduz o risco em qualquer emergência é <strong>nunca trabalhar sozinho</strong> no laboratório.</p>
       </div>
 
-      <div class="content-block">
-        <h3><span class="icon">🚪</span>Sinalização e infraestrutura de emergência</h3>
-        <p>Ao entrar no laboratório pela primeira vez, identifique a localização de:</p>
-        <div class="steps">
-          <div class="step"><div class="step-num">1</div><div>Saídas de emergência — identificadas por placas verdes de saída</div></div>
-          <div class="step"><div class="step-num">2</div><div>Extintores — consulte o Mapa de Riscos para localização</div></div>
-          <div class="step"><div class="step-num">3</div><div>Lava-olhos e chuveiro de emergência — consulte o Mapa de Riscos</div></div>
-          <div class="step"><div class="step-num">4</div><div>Kit de primeiros socorros — pergunte ao técnico responsável</div></div>
-        </div>
-      </div>
-
+      <!-- CHECKPOINT — CARROSSEL DE 5 PERGUNTAS -->
       <div class="checkpoint">
-        <h4>✔ Verificação de aprendizado</h4>
-        <div class="q-text">Qual a função do círculo de tamanho maior no Mapa de Riscos?</div>
-        <div class="cp-options">
-          <button class="cp-option" onclick="checkCp(this, false)">Indicar que o risco é biológico</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Indicar que o risco já está controlado</button>
-          <button class="cp-option" onclick="checkCp(this, true)">Indicar que o risco é alto e não controlado</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Indicar a localização dos extintores</button>
+        <div class="mini-quiz-eyebrow">
+          <h4 style="margin:0">✔ Verificação de aprendizado</h4>
+          <span class="mini-quiz-score" id="mq-score-m4"></span>
         </div>
-        <div class="cp-feedback">✅ Correto! No padrão do Mapa de Riscos, o tamanho do círculo representa a intensidade do risco — maior significa mais grave e/ou não controlado.</div>
+        <div id="mq-body-m4"></div>
       </div>
 
       <button class="btn-next" onclick="completeModule('m4','m5')">Próximo módulo →</button>
@@ -1036,79 +1128,77 @@
     <!-- ══ MÓDULO 5 ══ -->
     <div class="screen" id="screen-m5">
       <div class="module-eyebrow">Módulo 5 de 5</div>
-      <h2 class="module-title">Emergências e Canal de Reporte</h2>
+      <h2 class="module-title">Cultura de Segurança e Reporte de Incidentes</h2>
 
       <div class="video-placeholder">
         <div class="video-badge">📹 Vídeo</div>
         <div class="video-inner">
           <div class="video-play-btn">▶</div>
-          <div class="video-label">Procedimentos em Caso de Acidente no Laboratório<br><span style="font-size:12px;opacity:.6">— A ser inserido pela Comissão de Segurança —</span></div>
+          <div class="video-label">Módulo 5 — Cultura de Segurança e Reporte de Incidentes<br><span style="font-size:12px;opacity:.6">— Vídeo a ser inserido pela Comissão de Segurança —</span></div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🔥</span>Em caso de incêndio</h3>
-        <div class="steps">
-          <div class="step"><div class="step-num">1</div><div>Acione o alarme de incêndio ou chame atenção verbalmente</div></div>
-          <div class="step"><div class="step-num">2</div><div>Evacue o laboratório pela saída de emergência mais próxima</div></div>
-          <div class="step"><div class="step-num">3</div><div>Não utilize elevadores — use sempre as escadas</div></div>
-          <div class="step"><div class="step-num">4</div><div>Aguarde no ponto de encontro externo e aguarde orientação</div></div>
-          <div class="step"><div class="step-num">5</div><div>Somente use o extintor se tiver treinamento e a saída estiver livre</div></div>
-        </div>
+        <h3><span class="icon">🧭</span>O que é cultura de segurança</h3>
+        <p>Cultura de segurança não é um cartaz na parede nem um conjunto de regras para memorizar. É o conjunto de valores, atitudes e comportamentos que um grupo pratica coletivamente no dia a dia, mesmo quando ninguém está observando. Um laboratório com cultura de segurança forte é aquele onde as pessoas identificam riscos, comunicam o que percebem, corrigem o que está errado e aprendem com o que acontece.</p>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🩹</span>Em caso de contato com substância química</h3>
-        <div class="alert danger">
-          <div class="alert-icon">🔴</div>
-          <div><strong>Olhos:</strong> Lave imediatamente no lava-olhos por no mínimo 15 minutos com água corrente. Não esfregue.</div>
-        </div>
-        <div class="alert danger" style="margin-top:8px">
-          <div class="alert-icon">🔴</div>
-          <div><strong>Pele:</strong> Lave com água corrente por no mínimo 15 minutos. Se necessário, use o chuveiro de emergência. Retire roupas contaminadas.</div>
-        </div>
-        <div class="alert warning" style="margin-top:8px">
+        <h3><span class="icon">📉</span>A normalização do desvio</h3>
+        <p>Um dos maiores riscos em qualquer ambiente de trabalho vem da repetição de pequenos desvios que nunca geraram consequências visíveis. Com o tempo, o desvio deixa de parecer um desvio: vira rotina. Quando a situação de risco real aparece, o comportamento seguro não está mais disponível porque foi progressivamente substituído pelo hábito do atalho.</p>
+        <div class="alert warning">
           <div class="alert-icon">⚠️</div>
-          <div>Em qualquer caso, informe o professor ou técnico responsável imediatamente e consulte a FDS da substância para orientações específicas de primeiros socorros.</div>
+          <div>Esse processo se chama normalização do desvio. Cada reporte de um incidente, por menor que pareça, interrompe esse ciclo antes que ele se consolide.</div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">🩺</span>Em caso de queimadura</h3>
+        <h3><span class="icon">📋</span>O que deve ser reportado</h3>
+        <p>Muitos estudantes acreditam que só devem reportar acidentes com lesão grave. Na prática, cinco categorias de situações devem ser reportadas:</p>
         <div class="steps">
-          <div class="step"><div class="step-num">1</div><div>Resfrie a área queimada com água corrente fria por 10 a 20 minutos</div></div>
-          <div class="step"><div class="step-num">2</div><div>Não aplique pasta de dente, manteiga ou qualquer outra substância</div></div>
-          <div class="step"><div class="step-num">3</div><div>Informe o professor ou técnico e procure atendimento médico</div></div>
+          <div class="step"><div class="step-num">1</div><div><strong>Acidentes e lesões</strong> — qualquer acidente, independentemente da gravidade aparente.</div></div>
+          <div class="step"><div class="step-num">2</div><div><strong>Quase-acidentes</strong> — situações em que algo deu errado, mas não resultou em lesão ou dano.</div></div>
+          <div class="step"><div class="step-num">3</div><div><strong>Condições inseguras</strong> — equipamentos com defeito, sinalizações ausentes, obstruções em rotas de saída.</div></div>
+          <div class="step"><div class="step-num">4</div><div><strong>Falhas em equipamentos de segurança</strong> — chuveiro sem pressão, extintor vencido, lava-olhos entupido.</div></div>
+          <div class="step"><div class="step-num">5</div><div><strong>Comportamentos de risco</strong> — práticas inadequadas observadas em colegas ou outros usuários do espaço.</div></div>
+        </div>
+        <div class="alert success" style="margin-top:14px">
+          <div class="alert-icon">✅</div>
+          <div>Reportar uma condição insegura ou um comportamento de risco não é delatar um colega. É proteger a todos, incluindo o próprio colega.</div>
         </div>
       </div>
 
       <div class="content-block">
-        <h3><span class="icon">📋</span>Canal de Reporte de Incidentes</h3>
-        <p>A Comissão de Segurança do DEQ disponibiliza um <strong>canal de reporte voluntário</strong> de incidentes, quase-acidentes e condições de risco. O reporte pode ser feito de forma anônima e é fundamental para que o departamento aprenda com os desvios e melhore continuamente suas condições de segurança.</p>
-        <div class="alert success">
-          <div class="alert-icon">✅</div>
-          <div><strong>Reportar não é delatar.</strong> Incidentes não reportados deixam buracos abertos no sistema de defesa, que podem causar acidentes graves no futuro. Seu reporte protege a próxima turma.</div>
-        </div>
-        <div class="alert info" style="margin-top:8px">
-          <div class="alert-icon">🔗</div>
-          <div>Acesse o formulário de reporte diretamente no site da Comissão de Segurança do DEQ ou via QR Code disponível na entrada do laboratório.</div>
+        <h3><span class="icon">🤔</span>Por que as pessoas não reportam</h3>
+        <p>Razões comuns: a sensação de que o incidente foi pequeno demais, o medo de causar problema, a crença de que o responsável já sabe, ou o ceticismo de que nada vai mudar. Todas essas razões são compreensíveis — e todas contribuem para que riscos reais permaneçam invisíveis. O canal de reporte permite registro identificado ou anônimo, justamente para reduzir a barreira do medo de exposição.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">🖥️</span>Como usar o canal de reporte</h3>
+        <p>O canal de reporte da Comissão de Segurança do DEQ está disponível na plataforma digital, acessível pelo endereço que seu professor irá disponibilizar ou pelo QR Code presente nos espaços do laboratório. Na página <strong>Fale Conosco</strong>, descreva o que ocorreu, onde e quando, de forma objetiva — não é necessário identificar responsáveis. Se preferir, o preenchimento pode ser feito de forma anônima, a qualquer momento.</p>
+      </div>
+
+      <div class="content-block">
+        <h3><span class="icon">✋</span>Levantar a mão: seu direito e sua responsabilidade</h3>
+        <p>Se você não se sentir seguro para realizar uma operação — porque não entende completamente o procedimento, o equipamento parece com problema, ou não tem certeza sobre o EPI correto — levantar a mão e dizer "não me sinto seguro para fazer isso" não é sinal de despreparo. É sinal de maturidade profissional.</p>
+        <div class="alert info">
+          <div class="alert-icon">ℹ️</div>
+          <div>Nenhuma nota, nenhum cronograma de aula e nenhum experimento vale mais do que a sua integridade.</div>
         </div>
       </div>
 
+      <!-- CHECKPOINT — CARROSSEL DE 5 PERGUNTAS -->
       <div class="checkpoint">
-        <h4>✔ Verificação de aprendizado</h4>
-        <div class="q-text">Em caso de contato de substância química com os olhos, qual é o procedimento correto?</div>
-        <div class="cp-options">
-          <button class="cp-option" onclick="checkCp(this, false)">Esfregue os olhos com um pano limpo</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Aplique colírio e aguarde o fim da aula para consultar um médico</button>
-          <button class="cp-option" onclick="checkCp(this, true)">Lave imediatamente no lava-olhos por no mínimo 15 minutos, sem esfregar</button>
-          <button class="cp-option" onclick="checkCp(this, false)">Lave rapidamente com água e continue o experimento</button>
+        <div class="mini-quiz-eyebrow">
+          <h4 style="margin:0">✔ Verificação de aprendizado</h4>
+          <span class="mini-quiz-score" id="mq-score-m5"></span>
         </div>
-        <div class="cp-feedback">✅ Correto! A lavagem imediata e prolongada é essencial para reduzir a exposição. Informe o responsável e consulte a FDS para orientações adicionais.</div>
+        <div id="mq-body-m5"></div>
       </div>
 
       <button class="btn-next" onclick="completeModule('m5','quiz')">Ir para a Avaliação Final →</button>
     </div>
+
 
     <!-- ══ QUIZ ══ -->
     <div class="screen" id="screen-quiz">
@@ -1183,83 +1273,383 @@
     document.getElementById('mainProgressLabel').textContent = pct + '%';
   }
 
-  // ─── CHECKPOINT ───
-  function checkCp(btn, correct) {
-    const parent = btn.closest('.cp-options');
-    parent.querySelectorAll('.cp-option').forEach(b => { b.disabled = true; });
-    btn.classList.add(correct ? 'correct' : 'wrong');
-    if (!correct) {
-      parent.querySelectorAll('.cp-option').forEach(b => {
-        if (b.dataset.correct === 'true') b.classList.add('correct');
-      });
+  // ─── PERGUNTAS DE VERIFICAÇÃO POR MÓDULO (carrossel de 5 questões) ───
+  const moduleQuestions = {
+    m1: [
+      {
+        q: "Você vai realizar um experimento que envolve a manipulação de um solvente orgânico volátil. De acordo com a Hierarquia de Controles, qual deve ser a primeira medida a ser considerada antes de recorrer ao uso de EPI?",
+        opts: [
+          "Usar luvas de látex e máscara cirúrgica durante toda a manipulação nas bancadas abertas.",
+          "Trabalhar próximo a uma janela aberta para garantir ventilação natural suficiente.",
+          "Verificar se o solvente pode ser substituído por um de menor toxicidade e, caso contrário, realizar a manipulação na capela de exaustão.",
+          "Calçar luvas de nitrila e prosseguir com o experimento normalmente."
+        ],
+        correct: 2,
+        fb: "A hierarquia prioriza a substituição sobre o EPI. Quando não for possível substituir, a manipulação deve ocorrer em um controle de engenharia — a capela de exaustão."
+      },
+      {
+        q: "Durante um experimento, um colega respinga acidentalmente ácido clorídrico diluído no antebraço. Qual é a conduta correta e imediata?",
+        opts: [
+          "Lavar o local com papel toalha e continuar o experimento.",
+          "Dirigir-se imediatamente ao chuveiro de emergência e irrigar o local com água por pelo menos 15 minutos.",
+          "Aplicar bicarbonato de sódio diretamente no local afetado para neutralizar o ácido.",
+          "Aguardar orientação do professor antes de tomar qualquer atitude."
+        ],
+        correct: 1,
+        fb: "A irrigação imediata com água é a conduta correta para a maioria dos ácidos. Substâncias como o ácido fluorídrico exigem etapas adicionais — por isso, consultar a FDS é indispensável."
+      },
+      {
+        q: "Ao iniciar uma atividade prática, você percebe que vai manipular um solvente orgânico, mas só encontrou luvas de látex disponíveis no laboratório. O que você deve fazer?",
+        opts: [
+          "Usar as luvas de látex disponíveis, pois qualquer luva oferece proteção suficiente.",
+          "Realizar o experimento sem luvas, já que as luvas disponíveis não são adequadas.",
+          "Consultar a FDS da substância para verificar o material de luva recomendado e, se as disponíveis não forem adequadas, não iniciar o experimento até obter o EPI correto.",
+          "Usar duas camadas de luvas de látex para compensar a proteção insuficiente."
+        ],
+        correct: 2,
+        fb: "Luva de látex não protege contra todos os solventes orgânicos. Sem o EPI adequado, o experimento não deve começar."
+      },
+      {
+        q: "Qual das afirmativas abaixo descreve corretamente a relação entre EPI e EPC?",
+        opts: [
+          "O EPI substitui o EPC quando este não está disponível no laboratório.",
+          "O EPC é obrigatório apenas para experimentos de alto risco; nos demais, o EPI é suficiente.",
+          "O EPC protege todos os usuários do espaço simultaneamente e tem prioridade na hierarquia de controles; o EPI é a última barreira de proteção e complementa os demais controles.",
+          "EPI e EPC têm a mesma eficácia protetora e podem ser utilizados de forma intercambiável."
+        ],
+        correct: 2,
+        fb: "Na hierarquia de controles, o EPC (controle de engenharia) tem prioridade sobre o EPI, que é a última camada de proteção e complementa as demais."
+      },
+      {
+        q: "Antes de iniciar um experimento no laboratório, você deve realizar uma verificação de segurança. Qual das situações abaixo representa uma condição que impede o início da atividade?",
+        opts: [
+          "O jaleco está com as mangas dobradas, mas você pretende abaixá-las antes de começar.",
+          "Você não localizou onde estão o chuveiro de emergência e o lava-olhos mais próximos do seu posto de trabalho.",
+          "Você está usando óculos de proteção por cima dos seus óculos de grau.",
+          "A FDS da substância indica o uso de luvas de nitrila e você verificou que elas estão disponíveis."
+        ],
+        correct: 1,
+        fb: "Não saber a localização dos equipamentos de emergência é uma condição insegura que impede o início da atividade."
+      }
+    ],
+    m2: [
+      {
+        q: "Durante uma inspeção de rotina no laboratório, você nota uma placa verde com uma figura humana correndo e uma seta apontando para a direita. O que essa sinalização indica?",
+        opts: [
+          "A localização de um equipamento de combate a incêndio no corredor à direita.",
+          "Uma área de atenção onde o piso está molhado e escorregadio.",
+          "A direção da rota de fuga e saída de emergência mais próxima.",
+          "O local onde os EPIs obrigatórios devem ser retirados ao sair do laboratório."
+        ],
+        correct: 2,
+        fb: "Placas verdes com seta ou figura humana correndo indicam rotas de fuga, conforme o padrão de cores da NR-26."
+      },
+      {
+        q: "O alarme de emergência é acionado enquanto você realiza um experimento com aquecimento em chapa elétrica e um frasco de solvente aberto sobre a bancada. Qual é a sequência correta de ações?",
+        opts: [
+          "Deixar tudo como está e evacuar imediatamente, pois a velocidade é o fator mais importante.",
+          "Fechar o frasco, desligar a chapa, recolher seus pertences e evacuar pelo elevador para ganhar tempo.",
+          "Fechar o frasco, desligar a chapa, abandonar os pertences não essenciais e evacuar pela saída de emergência sinalizada sem utilizar elevadores.",
+          "Aguardar a confirmação do professor antes de interromper o experimento, para evitar perda de material."
+        ],
+        correct: 2,
+        fb: "A sequência correta neutraliza riscos adicionais — fontes de calor e reagentes abertos — antes da evacuação, que deve ocorrer sempre pelas escadas."
+      },
+      {
+        q: "Ao tentar evacuar o laboratório, você encontra o corredor parcialmente tomado por fumaça. Qual é a conduta correta?",
+        opts: [
+          "Retornar ao laboratório e aguardar o resgate, pois a fumaça torna a evacuação impossível.",
+          "Correr rapidamente pelo corredor com fumaça para minimizar o tempo de exposição.",
+          "Caminhar agachado em direção à saída de emergência, mantendo-se próximo ao chão onde o ar é mais respirável.",
+          "Abrir as janelas do corredor para dissipar a fumaça antes de prosseguir com a evacuação."
+        ],
+        correct: 2,
+        fb: "A fumaça sobe; o ar mais respirável fica próximo ao piso, por isso deve-se caminhar agachado em direção à saída."
+      },
+      {
+        q: "Após evacuar o prédio, você chega ao ponto de encontro e percebe que um colega que estava no laboratório com você não está presente. O que você deve fazer?",
+        opts: [
+          "Retornar ao laboratório para verificar se ele ainda está lá.",
+          "Aguardar alguns minutos antes de tomar qualquer atitude, pois ele pode ter usado outra saída.",
+          "Informar imediatamente o responsável presente no ponto de encontro ou as equipes de emergência sobre a ausência do colega.",
+          "Ligar para o celular do colega para verificar onde ele está antes de comunicar às autoridades."
+        ],
+        correct: 2,
+        fb: "A informação sobre pessoas não localizadas deve chegar rapidamente às equipes responsáveis, que estão preparadas para agir."
+      },
+      {
+        q: "Qual das afirmativas abaixo representa uma conduta incorreta durante uma evacuação de emergência?",
+        opts: [
+          "Caminhar em ritmo firme sem empurrar as pessoas à frente.",
+          "Orientar verbalmente um colega desorientado em direção à saída de emergência.",
+          "Permanecer no ponto de encontro até receber autorização formal para retornar ou se dispersar.",
+          "Retornar ao laboratório para buscar documentos importantes assim que a fumaça diminuir, antes da liberação oficial das autoridades."
+        ],
+        correct: 3,
+        fb: "Nenhum pertence justifica o retorno a uma área ainda não liberada pelas autoridades competentes."
+      }
+    ],
+    m3: [
+      {
+        q: "Ao pegar um frasco de reagente para iniciar um experimento, você observa em seu rótulo um pictograma GHS com uma chama dentro de um losango vermelho. O que essa sinalização indica e qual precaução imediata ela exige?",
+        opts: [
+          "Que a substância é tóxica por inalação e deve ser manipulada com máscara respiratória.",
+          "Que a substância é corrosiva e exige o uso de jaleco e óculos de proteção reforçados.",
+          "Que a substância é inflamável e sua manipulação deve ocorrer longe de fontes de ignição e calor, preferencialmente na capela de exaustão.",
+          "Que a substância apresenta risco para o meio ambiente e seu descarte deve seguir protocolo específico."
+        ],
+        correct: 2,
+        fb: "O pictograma de chama identifica substâncias inflamáveis, que exigem afastamento de fontes de ignição e manipulação na capela quando aplicável."
+      },
+      {
+        q: "Você precisa selecionar o tipo de luva adequado para manipular um solvente orgânico específico. Em qual seção da FDS você encontra essa informação?",
+        opts: [
+          "Seção 2 — Identificação dos perigos.",
+          "Seção 4 — Medidas de primeiros socorros.",
+          "Seção 8 — Controles de exposição e proteção individual.",
+          "Seção 10 — Estabilidade e reatividade."
+        ],
+        correct: 2,
+        fb: "A Seção 8 da FDS traz os EPIs recomendados, incluindo o material de luva adequado a cada substância."
+      },
+      {
+        q: "Durante um experimento, você acidentalmente respinga uma substância nos olhos. Antes de se dirigir ao lava-olhos, você quer saber o tempo de irrigação recomendado e se há algum procedimento adicional específico para aquela substância. Em qual seção da FDS você encontra essa informação?",
+        opts: [
+          "Seção 2 — Identificação dos perigos.",
+          "Seção 4 — Medidas de primeiros socorros.",
+          "Seção 7 — Manuseio e armazenamento.",
+          "Seção 8 — Controles de exposição e proteção individual."
+        ],
+        correct: 1,
+        fb: "A Seção 4 traz os procedimentos de primeiros socorros específicos para cada via de exposição."
+      },
+      {
+        q: "Ao organizar a bancada para um experimento, você percebe que dois frascos de reagentes estão posicionados lado a lado. Para verificar se essas substâncias são compatíveis entre si e podem permanecer próximas com segurança, qual seção da FDS deve ser consultada?",
+        opts: [
+          "Seção 5 — Medidas de combate a incêndio.",
+          "Seção 7 — Manuseio e armazenamento.",
+          "Seção 10 — Estabilidade e reatividade, que informa sobre incompatibilidades químicas.",
+          "Seção 2 — Identificação dos perigos."
+        ],
+        correct: 2,
+        fb: "A Seção 10 informa sobre reatividade e incompatibilidades químicas entre substâncias."
+      },
+      {
+        q: "Ao final de um experimento, você preparou um frasco intermediário com uma solução que não será utilizada imediatamente. Qual é a conduta correta?",
+        opts: [
+          "Deixar o frasco sem identificação na bancada, pois será descartado no dia seguinte.",
+          "Retornar o conteúdo ao frasco original do reagente para evitar desperdício.",
+          "Identificar o frasco com o nome da solução, concentração e data de preparo, e armazená-lo ou descartá-lo conforme as orientações da disciplina.",
+          "Transferir o conteúdo para um frasco menor sem rótulo e guardar na geladeira do laboratório."
+        ],
+        correct: 2,
+        fb: "Todo frasco intermediário deve ser identificado, mesmo que temporariamente, para evitar riscos a você e a outras pessoas."
+      }
+    ],
+    m4: [
+      {
+        q: "Você observa um pequeno foco de incêndio na bancada ao lado. Quais condições precisam estar satisfeitas simultaneamente para que o uso do extintor seja considerado uma resposta adequada?",
+        opts: [
+          "O fogo deve ser visível e você deve estar usando jaleco e óculos de proteção.",
+          "O extintor deve estar próximo e o fogo não deve ter atingido o teto do laboratório ainda.",
+          "O foco deve ser pequeno e controlado, você deve conhecer o funcionamento do extintor, os EPIs adequados devem estar em uso e uma rota de saída deve estar desobstruída às suas costas.",
+          "Qualquer pessoa presente pode usar o extintor em qualquer tipo de incêndio, desde que o faça rapidamente."
+        ],
+        correct: 2,
+        fb: "O uso do extintor só é seguro quando todas essas condições estão presentes simultaneamente; na dúvida, prioriza-se a evacuação."
+      },
+      {
+        q: "Durante um experimento, ocorre um derramamento de grande volume de um solvente orgânico volátil no chão do laboratório. Qual é a conduta correta?",
+        opts: [
+          "Cobrir o derramamento com papel toalha imediatamente e continuar o experimento após a limpeza.",
+          "Abrir as janelas e aguardar a evaporação natural do solvente antes de realizar a limpeza.",
+          "Evacuar a área imediatamente, isolar o acesso ao espaço, ventilar o ambiente se possível e acionar o responsável. Consultar a FDS para orientações específicas e, se necessário, contatar o CEATOX.",
+          "Usar o extintor de CO₂ para sufocar os vapores do solvente derramado."
+        ],
+        correct: 2,
+        fb: "Derramamentos grandes de substâncias voláteis exigem evacuação e isolamento da área, com apoio do CEATOX se necessário."
+      },
+      {
+        q: "Um colega se corta ao manipular uma peça de vidraria e há fragmentos de vidro visíveis na ferida. Qual é a conduta correta?",
+        opts: [
+          "Tentar remover os fragmentos com uma pinça antes de lavar o ferimento.",
+          "Lavar o ferimento com água corrente para remover os fragmentos naturalmente.",
+          "Não tentar remover os fragmentos, cobrir o ferimento com um pano limpo, aplicar pressão suave se houver sangramento e buscar atendimento médico.",
+          "Aplicar álcool diretamente sobre a ferida para evitar infecção e cobrir com curativo."
+        ],
+        correct: 2,
+        fb: "Fragmentos de vidro não devem ser removidos por leigos; a prioridade é conter o sangramento e buscar atendimento médico."
+      },
+      {
+        q: "Você se queima levemente ao encostar em uma chapa de aquecimento. Qual é a conduta correta imediata?",
+        opts: [
+          "Aplicar pasta de dente ou manteiga sobre a queimadura para aliviar a dor.",
+          "Cobrir a queimadura com curativo seco imediatamente para proteger a área afetada.",
+          "Resfriar o local com água corrente em temperatura ambiente por pelo menos 10 minutos, sem aplicar nenhuma substância sobre a queimadura.",
+          "Estourar as bolhas que se formarem para acelerar a cicatrização."
+        ],
+        correct: 2,
+        fb: "O resfriamento imediato com água é a conduta correta; substâncias caseiras podem agravar a lesão."
+      },
+      {
+        q: "Após conter com sucesso um pequeno derramamento de reagente sobre a bancada sem que ninguém se machuque, qual deve ser a sua conduta?",
+        opts: [
+          "Não há necessidade de comunicação, pois a situação foi resolvida sem consequências.",
+          "Comunicar apenas se o derramamento tiver envolvido uma substância classificada como perigosa.",
+          "Registrar o ocorrido em um caderno pessoal para controle próprio.",
+          "Comunicar o incidente ao responsável pelo laboratório e registrá-lo no canal de reporte da plataforma da Comissão de Segurança, independentemente da gravidade."
+        ],
+        correct: 3,
+        fb: "Todo incidente deve ser comunicado e registrado, mesmo quando resolvido sem consequências — isso alimenta a cultura de segurança do departamento."
+      }
+    ],
+    m5: [
+      {
+        q: "Durante uma aula prática, você observa que um colega realizou uma operação sem usar os óculos de proteção e nada aconteceu. Na semana seguinte, ele repete o comportamento. Do ponto de vista da cultura de segurança, o que esse padrão representa?",
+        opts: [
+          "Uma evidência de que o uso de óculos de proteção não é necessário para aquela operação específica.",
+          "Um comportamento aceitável desde que o colega avalie o risco antes de cada operação.",
+          "Um processo de normalização do desvio, em que a ausência de consequências imediatas leva à consolidação de um comportamento inseguro como rotina.",
+          "Uma situação que só se torna problemática se o comportamento for observado pelo professor."
+        ],
+        correct: 2,
+        fb: "A ausência de consequências imediatas não indica segurança — é exatamente o mecanismo da normalização do desvio."
+      },
+      {
+        q: "Ao final de uma aula prática, você percebe que o frasco de um reagente esteve mal fechado durante todo o experimento, gerando vapores no ambiente. Não houve lesão nem consequência aparente. O que você deve fazer?",
+        opts: [
+          "Não há necessidade de reporte, pois não houve acidente nem lesão.",
+          "Comentar informalmente com o colega ao lado, sem necessidade de registro formal.",
+          "Reportar apenas se o reagente for classificado como altamente tóxico.",
+          "Registrar o ocorrido no canal de reporte da Comissão de Segurança, pois quase-acidentes e condições inseguras devem ser reportados independentemente de terem gerado consequências visíveis."
+        ],
+        correct: 3,
+        fb: "Quase-acidentes carregam informação valiosa sobre riscos ainda não eliminados e devem sempre ser reportados."
+      },
+      {
+        q: "Você está prestes a iniciar uma operação no laboratório e percebe que não tem certeza sobre qual tipo de luva deve usar para a substância indicada no procedimento. Qual é a conduta correta?",
+        opts: [
+          "Usar as luvas de látex disponíveis, pois oferecem proteção suficiente para a maioria das substâncias.",
+          "Iniciar a operação sem luvas, pois o tempo necessário para consultar a FDS atrasaria a aula.",
+          "Interromper a preparação, consultar a FDS da substância na seção de EPIs recomendados e, se necessário, solicitar orientação ao professor antes de prosseguir.",
+          "Observar o que os colegas estão usando e repetir a escolha deles."
+        ],
+        correct: 2,
+        fb: "Antes de manipular qualquer substância, a escolha do EPI correto deve ser baseada na FDS, não em suposições."
+      },
+      {
+        q: "Qual das afirmativas abaixo descreve corretamente o papel do canal de reporte anônimo disponível na plataforma da Comissão de Segurança?",
+        opts: [
+          "O anonimato é disponibilizado para proteger o reportante de punições disciplinares em casos de acidentes graves.",
+          "O canal anônimo é destinado exclusivamente a situações em que o reportante observou um comportamento inadequado de outro usuário.",
+          "O anonimato reduz a barreira do medo de exposição, permitindo que qualquer usuário reporte condições inseguras, quase-acidentes ou comportamentos de risco sem receio de identificação, ampliando o volume de informações disponíveis para a Comissão de Segurança agir.",
+          "O reporte anônimo tem menor prioridade de avaliação pela Comissão de Segurança do que o reporte identificado."
+        ],
+        correct: 2,
+        fb: "O anonimato existe para reduzir o medo de se expor, garantindo que mais informações cheguem à Comissão de Segurança."
+      },
+      {
+        q: "Qual das afirmativas abaixo representa corretamente o conceito de cultura de segurança aplicado ao laboratório didático?",
+        opts: [
+          "Cultura de segurança é garantida pela existência de normas e regulamentos afixados nas paredes do laboratório.",
+          "Um laboratório com cultura de segurança forte é aquele em que nunca ocorrem acidentes.",
+          "Cultura de segurança depende exclusivamente da atuação dos professores e da Comissão de Segurança, cabendo aos estudantes apenas seguir as instruções recebidas.",
+          "Cultura de segurança é construída coletivamente pelo comportamento cotidiano de todos os usuários do espaço: identificar riscos, comunicar o que se observa, corrigir desvios e sentir-se responsável pela integridade de todos ao redor."
+        ],
+        correct: 3,
+        fb: "Cultura de segurança é um comportamento coletivo e contínuo, não um documento ou a ausência de acidentes."
+      }
+    ]
+  };
+
+  // ─── ESTADO DOS CARROSSÉIS DE MÓDULO ───
+  const mqState = {};
+  Object.keys(moduleQuestions).forEach(mod => {
+    mqState[mod] = { idx: 0, answers: new Array(moduleQuestions[mod].length).fill(null) };
+  });
+
+  function renderMiniQuiz(mod) {
+    const state = mqState[mod];
+    const list = moduleQuestions[mod];
+    const q = list[state.idx];
+    const letters = ['A', 'B', 'C', 'D'];
+    const answered = state.answers[state.idx];
+
+    const optsHtml = q.opts.map((opt, i) => {
+      let cls = 'cp-option';
+      if (answered !== null) {
+        if (i === q.correct) cls += ' correct';
+        else if (i === answered) cls += ' wrong';
+      }
+      return `<button class="${cls}" ${answered !== null ? 'disabled' : ''} onclick="answerMiniQuiz('${mod}', ${i})">${letters[i]}) ${opt}</button>`;
+    }).join('');
+
+    const dotsHtml = list.map((_, i) => {
+      let cls = 'mini-quiz-dot';
+      if (i === state.idx) cls += ' active';
+      if (state.answers[i] !== null) cls += (state.answers[i] === list[i].correct ? ' correct' : ' wrong');
+      return `<span class="${cls}" onclick="goToMiniQuestion('${mod}', ${i})" title="Questão ${i + 1}"></span>`;
+    }).join('');
+
+    const fbHtml = answered !== null
+      ? `<div class="cp-feedback" style="display:block">${answered === q.correct ? '✅ Correto! ' : '❌ Resposta incorreta. '}${q.fb}</div>`
+      : '';
+
+    document.getElementById('mq-body-' + mod).innerHTML = `
+      <div class="q-text">Questão ${state.idx + 1} de ${list.length} — ${q.q}</div>
+      <div class="cp-options">${optsHtml}</div>
+      ${fbHtml}
+      <div class="mini-quiz-controls">
+        <button class="mini-quiz-btn" onclick="prevMiniQuestion('${mod}')" ${state.idx === 0 ? 'disabled' : ''}>‹ Anterior</button>
+        <div class="mini-quiz-nav">${dotsHtml}</div>
+        <button class="mini-quiz-btn" onclick="nextMiniQuestion('${mod}')" ${state.idx === list.length - 1 ? 'disabled' : ''}>Próxima ›</button>
+      </div>
+    `;
+
+    const answeredCount = state.answers.filter(a => a !== null).length;
+    const correctCount = state.answers.filter((a, i) => a === list[i].correct).length;
+    const scoreEl = document.getElementById('mq-score-' + mod);
+    if (scoreEl) {
+      scoreEl.textContent = answeredCount > 0 ? `${correctCount}/${answeredCount} corretas` : '';
     }
-    const fb = btn.closest('.checkpoint').querySelector('.cp-feedback');
-    if (fb) fb.style.display = 'block';
   }
 
-  // ─── QUIZ DATA ───
-  const questions = [
-    {
-      q: "Na Hierarquia de Controles, qual nível é considerado o menos confiável para proteção do trabalhador?",
-      opts: ["Controles de Engenharia", "Substituição", "Equipamento de Proteção Individual (EPI)", "Controles Administrativos"],
-      correct: 2,
-      fb: "O EPI é o último recurso na hierarquia — depende inteiramente do comportamento individual do operador a cada momento de uso."
-    },
-    {
-      q: "O Modelo do Queijo Suíço, de James Reason, representa:",
-      opts: ["Uma dieta recomendada para pesquisadores de segurança", "Um sistema de barreiras de defesa com falhas latentes que, ao se alinharem, causam acidentes", "Um protocolo de descarte de resíduos de laboratório", "A classificação de substâncias perigosas pelo GHS"],
-      correct: 1,
-      fb: "Cada 'fatia' representa uma barreira de defesa. Os buracos são falhas latentes. O acidente ocorre quando todos os buracos se alinham, permitindo que a trajetória de risco atravesse todas as defesas."
-    },
-    {
-      q: "O que é a 'normalização do desvio' no contexto da segurança laboratorial?",
-      opts: ["A padronização de procedimentos operacionais seguros", "A aceitação gradual de práticas inseguras como normais, sem reação institucional", "O processo de calibração de instrumentos de medição", "O registro formal de desvios de temperatura nos experimentos"],
-      correct: 1,
-      fb: "Quando pequenos desvios não encontram nenhuma resposta institucional, eles progressivamente deixam de ser percebidos como problemas e se tornam a norma do grupo."
-    },
-    {
-      q: "Qual norma regulamentadora estabelece os limites máximos de exposição diária a ruído contínuo?",
-      opts: ["NR-13", "NR-17", "NR-26", "NR-15"],
-      correct: 3,
-      fb: "A NR-15 (Atividades e Operações Insalubres), em seu Anexo I, estabelece os limites de tolerância para ruído contínuo ou intermitente em função do nível de pressão sonora em dB(A)."
-    },
-    {
-      q: "Em qual situação os riscos químicos e biológicos no Laboratório Didático se tornam presentes?",
-      opts: ["Apenas quando a autoclave está em operação", "Apenas durante experimentos no DPQ", "Durante experimentos de reatores e biorreatores, que podem ocorrer em diferentes locais conforme a disposição dos kits", "Somente quando o técnico autoriza o acesso à área química"],
-      correct: 2,
-      fb: "Os kits didáticos são móveis e sua disposição muda a cada semestre. Por isso, os riscos químicos e biológicos associados a esses experimentos não têm localização fixa no Mapa de Riscos."
-    },
-    {
-      q: "O Procedimento Operacional Padrão (POP) é classificado na Hierarquia de Controles como:",
-      opts: ["Controle de Engenharia", "Eliminação do risco", "Controle Administrativo", "Equipamento de Proteção Individual"],
-      correct: 2,
-      fb: "O POP regulamenta o comportamento humano por meio de procedimentos padronizados — definição de Controle Administrativo. Ele complementa, mas não substitui, os controles de engenharia e os EPIs."
-    },
-    {
-      q: "Em caso de contato de substância química com os olhos, o procedimento correto é:",
-      opts: ["Esfregue os olhos com um pano limpo e aplique colírio", "Lave imediatamente no lava-olhos com água corrente por no mínimo 15 minutos, sem esfregar", "Lave rapidamente com água e informe o professor ao final da aula", "Aplique pomada oftálmica e aguarde atendimento médico"],
-      correct: 1,
-      fb: "A lavagem imediata e prolongada é essencial para reduzir a concentração da substância no olho. Esfregá-lo agrava a lesão. Após a lavagem, informe o responsável e consulte a FDS."
-    },
-    {
-      q: "Por que as Fichas com Dados de Segurança (FDS) devem estar acessíveis no ponto de uso?",
-      opts: ["Por ser apenas um requisito burocrático da NR-26 sem aplicação prática", "Para que os usuários possam consultar as propriedades físicas das substâncias para os cálculos do experimento", "Para que o usuário conheça os perigos e as medidas de emergência antes e durante a manipulação da substância", "Apenas para registro histórico em caso de fiscalização"],
-      correct: 2,
-      fb: "A FDS contém informações críticas sobre perigos, EPIs adequados, procedimentos de primeiros socorros e medidas de emergência. Consultá-la antes da manipulação é parte essencial da rotina segura."
-    },
-    {
-      q: "O que o círculo de maior tamanho no Mapa de Riscos indica?",
-      opts: ["Que o risco é de natureza biológica", "Que o risco é alto e não controlado, exigindo atenção prioritária", "Que existe um extintor próximo àquela área", "Que o risco já foi eliminado por medidas de engenharia"],
-      correct: 1,
-      fb: "No padrão adotado pelo Mapa de Riscos do DEQ/UFSCar, o tamanho do círculo representa a intensidade do risco: maior = alto e não controlado; médio = relevante e controlável; menor = baixo ou já controlado."
-    },
-    {
-      q: "Qual é a principal razão para reportar incidentes e quase-acidentes ao canal da Comissão de Segurança?",
-      opts: ["Para punir os responsáveis pelo ocorrido", "Para cumprir uma exigência formal sem relevância prática", "Para que o departamento possa aprender com os desvios, corrigir suas causas e evitar acidentes futuros", "Para registrar o histórico apenas para fins de pesquisa acadêmica"],
-      correct: 2,
-      fb: "Incidentes não reportados são alertas silenciados. Sem registro e análise, o departamento não pode identificar as vulnerabilidades do seu sistema antes que causem um acidente grave."
+  function answerMiniQuiz(mod, i) {
+    const state = mqState[mod];
+    if (state.answers[state.idx] !== null) return;
+    state.answers[state.idx] = i;
+    renderMiniQuiz(mod);
+  }
+
+  function goToMiniQuestion(mod, i) {
+    mqState[mod].idx = i;
+    renderMiniQuiz(mod);
+  }
+
+  function nextMiniQuestion(mod) {
+    const state = mqState[mod];
+    if (state.idx < moduleQuestions[mod].length - 1) {
+      state.idx++;
+      renderMiniQuiz(mod);
     }
-  ];
+  }
+
+  function prevMiniQuestion(mod) {
+    const state = mqState[mod];
+    if (state.idx > 0) {
+      state.idx--;
+      renderMiniQuiz(mod);
+    }
+  }
+
+  Object.keys(moduleQuestions).forEach(mod => renderMiniQuiz(mod));
+
+  // ─── AVALIAÇÃO FINAL: gerada a partir do banco de questões dos módulos ───
+  const questions = [];
+  ['m1', 'm2', 'm3', 'm4', 'm5'].forEach(mod => {
+    questions.push(moduleQuestions[mod][0]);
+    questions.push(moduleQuestions[mod][3]);
+  });
 
   // ─── QUIZ LOGIC ───
   let qIndex = 0;
